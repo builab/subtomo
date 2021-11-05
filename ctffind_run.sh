@@ -1,7 +1,7 @@
 # Script to run CTFfind automatically
 ctffind <<EOF
 01.mrc
-01_diagnostic.mrc
+01_output.mrc
 2.12
 300
 2.7
