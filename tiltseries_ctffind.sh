@@ -11,7 +11,7 @@ newstack -split 1 -append mrc $tomo  temp_
 
 tomo=${tomo/.mrc}
 
-rm ${tomo}_output_test.txt
+rm ${tomo}_output.txt
 
 for micro in temp_*.mrc
 do
