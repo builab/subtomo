@@ -43,7 +43,7 @@ EOF
 sed -i "s/^1/$view/g" ${view}_output.txt
 
 # Write to the output
-grep -v '#' ${view}_output.txt >> ${tomo}_output_test.txt
+grep -v '#' ${view}_output.txt >> ${tomo}_output.txt
 
 done;
 
