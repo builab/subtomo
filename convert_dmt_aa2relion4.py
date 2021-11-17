@@ -3,7 +3,7 @@
 
 import numpy as np
 import pandas as pd
-import argparse, os
+import argparse, os, re
 
 from eulerangles import euler2euler
 from eulerangles import convert_eulers
@@ -107,7 +107,8 @@ if __name__=='__main__':
 		# This is not so robust for tomoa & tomob name yet
 		tomoSubName = record[0].replace('_ida_v1', '')
 		tomoSubName = tomoSubName[:-4]
-		tomoName = tomoSubName.replace('[abcd]', '')
+		# Replace a, b, c in case. Not exact more than 3 tomo
+		tomoName = re.sub('[a-z]$', '', tomoSubName)
 	
 		doubletId = int(record[1][-1])
 
