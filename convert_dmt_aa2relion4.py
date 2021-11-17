@@ -21,7 +21,7 @@ def write_star_4(dfin, outfile):
 
 
 """Convert aa doc & star to dynamo table"""
-def aa_to_relion(starFile, docFile, TomoName, tomoNo, binFactor, pixelSize, doubletId):
+def aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId):
     # Read the doc file
     header_list=["no", "norec", "phi", "theta", "psi", "OriginX", "OriginY", "OriginZ", "cc"]
     df = pd.read_csv(docFile, delim_whitespace=True, names=header_list)
@@ -86,45 +86,44 @@ if __name__=='__main__':
 	parser = argparse.ArgumentParser(description='Convert doc & star file to Relion 4.0 input file')
 	parser.add_argument('--i', help='Input list file',required=True)
 	parser.add_argument('--ostar', help='Output star file',required=True)
-    parser.add_argument('--angpix', help='Input pixel size',required=True)
-    parser.add_argument('--bin', help='Bin of current tomo',required=True)
+	parser.add_argument('--angpix', help='Input pixel size',required=True)
+	parser.add_argument('--bin', help='Bin of current tomo',required=True)
 
 
 
-    args = parser.parse_args()
-    listDoublet = open(args.i, 'r')
-    pixelSize = float(args.angpix)
-    binFactor = float(args.bin)
+	args = parser.parse_args()
+	listDoublet = open(args.i, 'r')
+	pixelSize = float(args.angpix)
+	binFactor = float(args.bin)
         
-    tomoList = {}
-    tomoNo = 1;
-    df_all = None
-    
-    for line in listDoublet:   
-        if line.startswith('#'):
-            next
-        record = line.split()
-        # Check tomo
-        # This is not so robus for tomoa & tomob name yet
-        tomoSubName = os.path.commonprefix([record[0], record[1]])
-	tomoName = tomoSubName.replace('[abcd]', '')
-	doubletId = record[1][-1]
-        print(tomoSubName + '-->' + record[0])
-	if tomoList.get(tomoName) == Empty:
-		tomoNo += 1
-		tomoList[tomoName] = tomoNo
-	# This part need to be fixed
-        starFile = 'star/' + record[1]  + '.txt'
-        docFile = 'doc/doc_total_' + record[0] + '.spi'
-        df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
-
+	tomoList = {}
+	tomoNo = 1;
+	df_all = None
+    	
+	for line in listDoublet:   
+		if line.startswith('#'):
+			next
+		record = line.split()
+        	# Check tomo
+        	# This is not so robus for tomoa & tomob name yet
+        	tomoSubName = os.path.commonprefix([record[0], record[1]])
+		tomoName = tomoSubName.replace('[abcd]', '')
 	
-	if df_all is None:
-		df_all = df_relion.copy()
-            else:
-                df_all = df_all.append(df_relion)
+		doubletId = int(record[1][-1])
+       		print(tomoSubName + '-->' + str(doubletId))
+		if tomoList.get(tomoName) == Empty:
+			tomoNo += 1
+			tomoList[tomoName] = tomoNo
+		# This part need to be fixed
+       		starFile = 'star/' + record[1]  + '.txt'
+        	docFile = 'doc/doc_total_' + record[0] + '.spi'
+        	df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
 
-        tomoNo = tomoNo + 1
+		if df_all is None:
+			df_all = df_relion.copy()
+		else:
+			df_all = df_all.append(df_relion)
+
 
     # Renumber
     df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
