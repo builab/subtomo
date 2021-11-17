@@ -109,14 +109,14 @@ if __name__=='__main__':
 		tomoName = tomoSubName.replace('[abcd]', '')
 	
 		doubletId = int(record[1][-1])
-	   		print(tomoSubName + '-->' + str(doubletId))
+	   	print(tomoSubName + '-->' + str(doubletId))
 		if tomoList.get(tomoName) == None:
 			tomoNo += 1
 			tomoList[tomoName] = tomoNo
 		# This part need to be fixed
-	   		starFile = 'star/' + record[1]  + '.txt'
-			docFile = 'doc/doc_total_' + record[0] + '.spi'
-			df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
+	   	starFile = 'star/' + record[1]  + '.txt'
+		docFile = 'doc/doc_total_' + record[0] + '.spi'
+		df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
 
 		if df_all is None:
 			df_all = df_relion.copy()
