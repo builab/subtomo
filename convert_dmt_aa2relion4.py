@@ -3,9 +3,8 @@
 
 import numpy as np
 import pandas as pd
+import argparse, os
 
-from eulerangles import euler2matrix
-from eulerangles import matrix2euler
 from eulerangles import euler2euler
 from eulerangles import convert_eulers
 
@@ -81,14 +80,35 @@ def aa_to_relion(starFile, docFile, TomoName, tomoNo, binFactor, pixelSize, doub
 
 
 if __name__=='__main__':
-    tomoList = ["TS_41", "TS_43", "TS_46", "TS_47"]
+    # get name of input starfile, output starfile, output stack file
+	print('Script to convert from AxonemeAlign to Relion. HB 2021')
+	
+	parser = argparse.ArgumentParser(description='Convert doc & star file to Relion 4.0 input file')
+	parser.add_argument('--i', help='Input list file',required=True)
+	parser.add_argument('--ostar', help='Output star file',required=True)
+    parser.add_argument('--angpix', help='Input pixel size',required=True)
+    parser.add_argument('--bin', help='Bin of current tomo',required=True)
+
+
+
+    args = parser.parse_args()
+    listDoublet = open(args.i, 'r')
+    pixelSize = float(args.angpix)
+    binFactor = float(args.bin)
+        
+    tomoList = {}
     tomoNo = 1;
-    pixelSize = 8.48
-    binFactor = 4
     df_all = None
-    for tomoName in tomoList:
-        print(tomoName)
-        #for doubletId in range(1,10):
+    
+    for line in listDoublet:   
+        if line.startswith('#'):
+            next
+        record = line.split()
+        # Check tomo
+        # This is not so robus for tomoa & tomob name yet
+        tomoName = os.path.commonprefix([record[0], record[1]])
+        print(tomoName + '-->' + record[0])
+
         for doubletId in range(1,10):
             print('-->' + str(doubletId))
             starFile = 'star/' + tomoName + '_' + str(doubletId) + '.txt'
@@ -103,5 +123,5 @@ if __name__=='__main__':
 
     # Renumber
     df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
-    write_star_4(df_all, 'coord_2tomo.star') 	
+    write_star_4(df_all, args.ostar) 	
 
