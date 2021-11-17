@@ -75,7 +75,6 @@ def aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doub
     a[1::2] = 2
 
     df_relion['RandomSubset'] = a
-    
     return df_relion
 
 
@@ -111,7 +110,7 @@ if __name__=='__main__':
 	
 		doubletId = int(record[1][-1])
        		print(tomoSubName + '-->' + str(doubletId))
-		if tomoList.get(tomoName) == Empty:
+		if tomoList.get(tomoName) == None:
 			tomoNo += 1
 			tomoList[tomoName] = tomoNo
 		# This part need to be fixed
