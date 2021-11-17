@@ -123,8 +123,7 @@ if __name__=='__main__':
 		else:
 			df_all = df_all.append(df_relion)
 
-
-    # Renumber
-    df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
-    write_star_4(df_all, args.ostar) 	
+	# Renumber
+	df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
+	write_star_4(df_all, args.ostar) 	
 
