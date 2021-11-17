@@ -114,7 +114,7 @@ if __name__=='__main__':
 			tomoNo += 1
 			tomoList[tomoName] = tomoNo
 		# This part need to be fixed
-	   	starFile = 'star/' + record[1]  + '.txt'
+		starFile = 'star/' + record[1]  + '.txt'
 		docFile = 'doc/doc_total_' + record[0] + '.spi'
 		df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
 
