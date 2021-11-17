@@ -106,16 +106,21 @@ if __name__=='__main__':
         record = line.split()
         # Check tomo
         # This is not so robus for tomoa & tomob name yet
-        tomoName = os.path.commonprefix([record[0], record[1]])
-        print(tomoName + '-->' + record[0])
+        tomoSubName = os.path.commonprefix([record[0], record[1]])
+	tomoName = tomoSubName.replace('[abcd]', '')
+	doubletId = record[1][-1]
+        print(tomoSubName + '-->' + record[0])
+	if tomoList.get(tomoName) == Empty:
+		tomoNo += 1
+		tomoList[tomoName] = tomoNo
+	# This part need to be fixed
+        starFile = 'star/' + record[1]  + '.txt'
+        docFile = 'doc/doc_total_' + record[0] + '.spi'
+        df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
 
-        for doubletId in range(1,10):
-            print('-->' + str(doubletId))
-            starFile = 'star/' + tomoName + '_' + str(doubletId) + '.txt'
-            docFile = 'doc/doc_total_' + tomoName + '_00' + str(doubletId) + '.spi'
-            df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
-            if df_all is None:
-                df_all = df_relion.copy()
+	
+	if df_all is None:
+		df_all = df_relion.copy()
             else:
                 df_all = df_all.append(df_relion)
 
