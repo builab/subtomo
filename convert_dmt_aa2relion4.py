@@ -110,7 +110,8 @@ if __name__=='__main__':
 		tomoName = tomoSubName.replace('[abcd]', '')
 	
 		doubletId = int(record[1][-1])
-		print(tomoSubName + '-->' + str(doubletId))
+		print(tomoSubName)
+		print('   -->' + str(doubletId))
 		if tomoList.get(tomoName) == None:
 			tomoNo += 1
 			tomoList[tomoName] = tomoNo
