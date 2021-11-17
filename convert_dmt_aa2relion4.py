@@ -105,7 +105,7 @@ if __name__=='__main__':
 		record = line.split()
         	# Check tomo
         	# This is not so robus for tomoa & tomob name yet
-        	tomoSubName = os.path.commonprefix([record[0], record[1]])
+		tomoSubName = os.path.commonprefix([record[0], record[1]])
 		tomoName = tomoSubName.replace('[abcd]', '')
 	
 		doubletId = int(record[1][-1])
