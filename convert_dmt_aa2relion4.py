@@ -110,11 +110,12 @@ if __name__=='__main__':
 		tomoName = tomoSubName.replace('[abcd]', '')
 	
 		doubletId = int(record[1][-1])
-		print(tomoSubName)
-		print('   -->' + str(doubletId))
+
 		if tomoList.get(tomoName) == None:
+			print(tomoSubName)
 			tomoNo += 1
 			tomoList[tomoName] = tomoNo
+		print('   -->' + str(doubletId))
 		# This part need to be fixed
 		starFile = 'star/' + record[1]  + '.txt'
 		docFile = 'doc/doc_total_' + record[0] + '.spi'
