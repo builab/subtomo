@@ -101,7 +101,7 @@ if __name__=='__main__':
 		
 	for line in listDoublet:   
 		if line.startswith('#'):
-			next
+			continue
 		record = line.split()
 		# Check tomo
 		# This is not so robus for tomoa & tomob name yet
