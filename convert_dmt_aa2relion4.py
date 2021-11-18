@@ -22,6 +22,10 @@ def write_star_4(dfin, outfile):
 def preprocess_spider_doc(spiderdoc):
 	cmd = 'sed -i \'/^ ;/d\' ' + spiderdoc
 	os.system(cmd)
+	
+def preprocess_bstar(starFile):
+	cmd = 'grep \'^\\s*\[0-9\]\' ' + starFile + ' > ' starFile.replace('.star', '.txt')
+	print(cmd)
 
 
 """Convert aa doc & star to dynamo table"""
@@ -118,11 +122,12 @@ if __name__=='__main__':
 			tomoList[tomoName] = tomoNo
 		print('   -->' + str(doubletId))
 		# This part need to be fixed
-		starFile = 'star/' + record[1]  + '.txt'
+		starFile = 'star/' + record[1]  + '.star'
 		docFile = 'doc/doc_total_' + record[0] + '.spi'
 		# Remove the comment in spider file
+		preprocess_bstar(starFile)
 		preprocess_spider_doc(docFile)
-		df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
+		df_relion = aa_to_relion(starFile.replace('.star', '.txt'), docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
 
 		if df_all is None:
 			df_all = df_relion.copy()
