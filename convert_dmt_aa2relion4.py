@@ -130,7 +130,7 @@ if __name__=='__main__':
 			print(tomoName)
 			tomoNo += 1
 			tomoList[tomoName] = tomoNo
-			df_tomo['TomoName'].loc(tomoNo-1) = tomoName
+			df_tomo.loc['TomoName', tomoNo-1] = tomoName
 			df_tomo['TomoTiltSeriesName'].loc(tomoNo-1) = 'tomograms/' + tomoName + '/' + tomoName + '.mrc'
 			df_tomo['TomoImportCtfFindFile'].loc(tomoNo-1) = 'tomograms/' + tomoName + '/' + tomoName + '_output.txt'
 			df_tomo['TomoImportImodDir'].loc(tomoNo-1) = 'tomograms/' + tomoName
