@@ -24,7 +24,7 @@ def preprocess_spider_doc(spiderdoc):
 	os.system(cmd)
 	
 def preprocess_bstar(starFile):
-	cmd = 'grep \'^\\s*\[0-9\]\' ' + starFile + ' > ' starFile.replace('.star', '.txt')
+	cmd = 'grep \'^\\s*\[0-9\]\' ' + starFile + ' > ' + starFile.replace('.star', '.txt')
 	print(cmd)
 
 
