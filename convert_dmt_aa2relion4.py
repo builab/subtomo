@@ -110,7 +110,7 @@ if __name__=='__main__':
 	# Template for tomo_description
 	orderList = 'input//order_list.csv'
 	
-	tomo_header_list = ["TomoName", "TomoTiltSeriesName", "TomoImportCtfFindFile", "TomoImportImodDir", "TomoImportOrderList", "TomoImportCulledFile"]
+	tomo_header_list = ["TomoName", "TomoTiltSeriesName", "TomoImportCtfFindFile", "TomoImportImodDir", "TomoImportFractionalDose", "TomoImportOrderList", "TomoImportCulledFile"]
 	df_tomo = pd.DataFrame(columns = tomo_header_list)
 		
 	for line in listDoublet:   
