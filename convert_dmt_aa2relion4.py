@@ -155,7 +155,6 @@ if __name__=='__main__':
 			df_all = df_all.append(df_relion)
 
 	# Renumber
-	print(df_tomo)
 	df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
 	write_star_4(df_all, args.ostar, 'particles') 
 	write_star_4(df_tomo, 'tomograms_descr.star', '')
