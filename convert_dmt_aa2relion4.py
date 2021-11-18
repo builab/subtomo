@@ -21,8 +21,7 @@ def write_star_4(dfin, outfile):
 
 def preprocess_spider_doc(spiderdoc):
 	cmd = 'sed -i \'/^ ;/d\' ' + spiderdoc
-	print(cmd)
-	#os.system
+	os.system(cmd)
 
 
 """Convert aa doc & star to dynamo table"""
@@ -121,6 +120,7 @@ if __name__=='__main__':
 		# This part need to be fixed
 		starFile = 'star/' + record[1]  + '.txt'
 		docFile = 'doc/doc_total_' + record[0] + '.spi'
+		# Remove the comment in spider file
 		preprocess_spider_doc(docFile)
 		df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
 
