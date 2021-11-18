@@ -24,7 +24,7 @@ def write_star_4(dfin, outfile):
 def aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId):
 	# Read the doc file
 	header_list=["no", "norec", "phi", "theta", "psi", "OriginX", "OriginY", "OriginZ", "cc"]
-	df = pd.read_csv(docFile, delim_whitespace=True, names=header_list, comment=';')
+	df = pd.read_csv(docFile, delim_whitespace=True, names=header_list, comment=' ;')
 	fulldata = df.to_numpy()
 
 	# Extract phi, theta, psi (AA format) and reverse sign of phi & psi
