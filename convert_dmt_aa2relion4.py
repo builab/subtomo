@@ -24,8 +24,8 @@ def preprocess_spider_doc(spiderdoc):
 	os.system(cmd)
 	
 def preprocess_bstar(starFile):
-	cmd = 'grep \'^\\s*\[0-9\]\' ' + starFile + ' > ' + starFile.replace('.star', '.txt')
-	print(cmd)
+	cmd = 'grep \'^\\s*[0-9]\' ' + starFile + ' > ' + starFile.replace('.star', '.txt')
+	os.system(cmd)
 
 
 """Convert aa doc & star to dynamo table"""
@@ -127,6 +127,7 @@ if __name__=='__main__':
 		# Remove the comment in spider file
 		preprocess_bstar(starFile)
 		preprocess_spider_doc(docFile)
+		# Convert
 		df_relion = aa_to_relion(starFile.replace('.star', '.txt'), docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
 
 		if df_all is None:
