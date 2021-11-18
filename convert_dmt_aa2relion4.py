@@ -10,10 +10,10 @@ import argparse, os, re
 from eulerangles import euler2euler
 from eulerangles import convert_eulers
 
-def write_star_4(dfin, outfile):
+def write_star_4(dfin, outfile, tableType):
 	out = open(outfile, 'w')
 	out.write("# version 30001 from aa\n\n")
-	out.write("data_particles\n\n")
+	out.write("data_" + tableType +"\n\n")
 	out.write("loop_\n")
 	for i in range(len(dfin.columns)):
 		out.write('_rln{:s} #{:d}\n'.format(dfin.columns[i], i+1))
@@ -95,6 +95,8 @@ if __name__=='__main__':
 	parser.add_argument('--ostar', help='Output star file',required=True)
 	parser.add_argument('--angpix', help='Input pixel size',required=True)
 	parser.add_argument('--bin', help='Bin of current tomo',required=True)
+	parser.add_argument('--frac_dose', help='Tomo fractional dose',required=True, default=2)
+
 
 	args = parser.parse_args()
 	listDoublet = open(args.i, 'r')
@@ -102,8 +104,14 @@ if __name__=='__main__':
 	binFactor = float(args.bin)
 		
 	tomoList = {}
-	tomoNo = 1;
+	tomoNo = 0;
 	df_all = None
+	
+	# Template for tomo_description
+	orderList = 'input//order_list.csv'
+	
+	tomo_header_list = ["TomoName", "TomoTiltSeriesName", "TomoImportCtfFindFile", "TomoImportImodDir", "TomoImportOrderList", "TomoImportCulledFile"]
+	df_tomo = pd.DataFrame(columns = tomo_header_list)
 		
 	for line in listDoublet:   
 		if line.startswith('#'):
@@ -122,6 +130,15 @@ if __name__=='__main__':
 			print(tomoName)
 			tomoNo += 1
 			tomoList[tomoName] = tomoNo
+			df_tomo['TomoName'][tomoNo] = tomoName
+			df_tomo['TomoTiltSeriesName'][tomoNo] = 'tomograms/' + tomoName + '/' + tomoName + '.mrc'
+			df_tomo['TomoImportCtfFindFile'][tomoNo] = 'tomograms/' + tomoName + '/' + tomoName + '_output.txt'
+			df_tomo['TomoImportImodDir'][tomoNo] = 'tomograms/' + tomoName
+			df_tomo['TomoImportFractionalDose'][tomoNo] = args.frac_dose
+			df_tomo['TomoImportOrderList'][tomoNo] = orderList
+			df_tomo['TomoImportCulledFile'][tomoNo] = 'tomograms/' + tomoName + '/' + tomoName + '_culled.mrc'
+			
+			
 		print('   -->' + str(doubletId))
 		# This part need to be fixed
 		starFile = 'star/' + record[1]  + '.star'
@@ -139,5 +156,6 @@ if __name__=='__main__':
 
 	# Renumber
 	df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
-	write_star_4(df_all, args.ostar) 	
+	write_star_4(df_all, args.ostar, 'particles') 
+	write_star_4(df_tomo, 'tomograms_descr.star', '')
 
