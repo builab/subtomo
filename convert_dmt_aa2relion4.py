@@ -20,7 +20,7 @@ def write_star_4(dfin, outfile):
 	out.close()
 
 def preprocess_spider_doc(spiderdoc):
-	cmd = 'sed -i ''/^ ;/d'' ' + spiderdoc
+	cmd = 'sed -i \'/^ ;/d\' ' + spiderdoc
 	print(cmd)
 	#os.system
 
