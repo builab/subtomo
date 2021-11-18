@@ -1,5 +1,7 @@
 #/usr/bin/python3
 # Convert the entire cilia from AA to relion4
+# HB 11/2021
+# Still not yet convert the shift
 
 import numpy as np
 import pandas as pd
