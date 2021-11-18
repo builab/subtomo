@@ -17,14 +17,19 @@ def write_star_4(dfin, outfile):
 		out.write('_rln{:s} #{:d}\n'.format(dfin.columns[i], i+1))
 	out.write(dfin.to_string(index=False, header=False))
 	out.write("\n")
-	out.close()		
+	out.close()
+
+def preprocess_spider_doc(spiderdoc):
+	cmd = 'sed -i ''/^ ;/d'' ' + spiderdoc
+	print(cmd)
+	#os.system
 
 
 """Convert aa doc & star to dynamo table"""
 def aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId):
 	# Read the doc file
 	header_list=["no", "norec", "phi", "theta", "psi", "OriginX", "OriginY", "OriginZ", "cc"]
-	df = pd.read_csv(docFile, delim_whitespace=True, names=header_list, comment=' ;')
+	df = pd.read_csv(docFile, delim_whitespace=True, names=header_list)
 	fulldata = df.to_numpy()
 
 	# Extract phi, theta, psi (AA format) and reverse sign of phi & psi
@@ -44,8 +49,6 @@ def aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doub
 	nrows, ncols = origin.shape
 
 	# Hard Code Here
-
-
 	header_list = ["TomoName", "TomoParticleId", "TomoManifoldIndex", "CoordinateX", "CoordinateY", "CoordinateZ", "OriginXAngst", "OriginYAngst", "OriginZAngst", "AngleRot", "AngleTilt", "AnglePsi", "ClassNumber", "RandomSubset"]
 	df_relion = pd.DataFrame(columns = header_list)
 	df_relion['TomoParticleId'] = np.arange(len(df2), dtype=np.int16) + 1
@@ -53,7 +56,7 @@ def aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doub
 	df_relion['CoordinateX'] = df2['CoordinateX']*binFactor;
 	df_relion['CoordinateY'] = df2['CoordinateY']*binFactor;
 	df_relion['CoordinateZ'] = df2['CoordinateZ']*binFactor;
-
+	# To adjust originXYZ
 	df_relion['OriginXAngst'] = np.zeros(len(df_relion['CoordinateX']))
 	df_relion['OriginYAngst'] = np.zeros(len(df_relion['CoordinateX']))
 	df_relion['OriginZAngst'] = np.zeros(len(df_relion['CoordinateX']))
@@ -88,8 +91,6 @@ if __name__=='__main__':
 	parser.add_argument('--angpix', help='Input pixel size',required=True)
 	parser.add_argument('--bin', help='Bin of current tomo',required=True)
 
-
-
 	args = parser.parse_args()
 	listDoublet = open(args.i, 'r')
 	pixelSize = float(args.angpix)
@@ -120,6 +121,7 @@ if __name__=='__main__':
 		# This part need to be fixed
 		starFile = 'star/' + record[1]  + '.txt'
 		docFile = 'doc/doc_total_' + record[0] + '.spi'
+		preprocess_spider_doc(docFile)
 		df_relion = aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
 
 		if df_all is None:
