@@ -135,8 +135,8 @@ if __name__=='__main__':
 			df_tomo.loc['TomoImportCtfFindFile', tomoNo-1] = 'tomograms/' + tomoName + '/' + tomoName + '_output.txt'
 			df_tomo.loc['TomoImportImodDir', tomoNo-1] = 'tomograms/' + tomoName
 			df_tomo.loc['TomoImportFractionalDose', tomoNo-1] = args.frac_dose
-			df_tomo.loc['TomoImportOrderList'], tomoNo-1] = orderList
-			df_tomo.loc['TomoImportCulledFile'], tomoNo-1] = 'tomograms/' + tomoName + '/' + tomoName + '_culled.mrc'
+			df_tomo.loc['TomoImportOrderList', tomoNo-1] = orderList
+			df_tomo.loc['TomoImportCulledFile', tomoNo-1] = 'tomograms/' + tomoName + '/' + tomoName + '_culled.mrc'
 			
 			
 		print('   -->' + str(doubletId))
