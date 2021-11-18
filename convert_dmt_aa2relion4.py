@@ -156,6 +156,8 @@ if __name__=='__main__':
 
 	# Renumber
 	df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
+	print("Writing " + args.ostar)
 	write_star_4(df_all, args.ostar, 'particles') 
+	print("Writing tomograms_descr.star")
 	write_star_4(df_tomo, 'tomograms_descr.star', '')
 
