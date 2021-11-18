@@ -131,12 +131,12 @@ if __name__=='__main__':
 			tomoNo += 1
 			tomoList[tomoName] = tomoNo
 			df_tomo.loc['TomoName', tomoNo-1] = tomoName
-			df_tomo['TomoTiltSeriesName'].loc(tomoNo-1) = 'tomograms/' + tomoName + '/' + tomoName + '.mrc'
-			df_tomo['TomoImportCtfFindFile'].loc(tomoNo-1) = 'tomograms/' + tomoName + '/' + tomoName + '_output.txt'
-			df_tomo['TomoImportImodDir'].loc(tomoNo-1) = 'tomograms/' + tomoName
-			df_tomo['TomoImportFractionalDose'].loc(tomoNo-1) = args.frac_dose
-			df_tomo['TomoImportOrderList'].loc(tomoNo-1) = orderList
-			df_tomo['TomoImportCulledFile'].loc(tomoNo-1) = 'tomograms/' + tomoName + '/' + tomoName + '_culled.mrc'
+			df_tomo.loc['TomoTiltSeriesName', tomoNo-1] = 'tomograms/' + tomoName + '/' + tomoName + '.mrc'
+			df_tomo.loc['TomoImportCtfFindFile', tomoNo-1] = 'tomograms/' + tomoName + '/' + tomoName + '_output.txt'
+			df_tomo.loc['TomoImportImodDir', tomoNo-1] = 'tomograms/' + tomoName
+			df_tomo.loc['TomoImportFractionalDose', tomoNo-1] = args.frac_dose
+			df_tomo.loc['TomoImportOrderList'], tomoNo-1] = orderList
+			df_tomo.loc['TomoImportCulledFile'], tomoNo-1] = 'tomograms/' + tomoName + '/' + tomoName + '_culled.mrc'
 			
 			
 		print('   -->' + str(doubletId))
