@@ -56,7 +56,7 @@ if __name__=='__main__':
   
 	for tiltseries in tsList:
 		tsName = os.path.basename(tiltseries)
-		tsPath = os.path()
+		tsPath = os.path.dirname(tiltseries)
 		os.chdir(tsPath)
 		print('Processing ' + tiltseries + ' ...')
 		run_ctffind(args.ctffind_exe, tsName, args.angpix, args.cs, args.voltage, args.amp, args.tile, args.minres, args.maxres, args.dmin, args.dmax)
