@@ -22,12 +22,12 @@ if __name__=='__main__':
 			break
 		tsName = tiltseries.replace('.mrc', '')
 		mrcDoc = tiltseries.replace('.mrc', '.mrc.mdoc')
-		#os.mkdir(tsName)
+		os.mkdir(tsName)
 		# Move tilt series
 		print('mv ' + tiltseries + ' ' + os.path.join(tsName, tiltseries))
+		shutil.move(tiltseries, os.path.join(tsName, tiltseries))\
 		print('mv ' + mrcDoc + ' ' + os.path.join(tsName, mrcDoc))
-		#shutil.move(tiltseries, os.path.join(tsName, tiltseries))
-		#shutil.move(mrcDoc, os.path.join(tsName, mrcDoc))
+		shutil.move(mrcDoc, os.path.join(tsName, mrcDoc))
 
 
 
