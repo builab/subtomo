@@ -5,12 +5,17 @@ Created on Dec 8 2021
 Script to run batch imod through the command line
 Only use for newst & tilt & tilt_sirt for now
 
+Not done yet.
+
 This is used specifically for K3 in McGill.
 
 @author: Huy Bui, McGill
 """
 
 import argparse, os
+
+def runNewst(tsStack, binFactor
+	'''Write newst and run'''
 
 if __name__=='__main__':
 	parser = argparse.ArgumentParser(description='Batch tomo reconstruct using IMOD')
@@ -22,3 +27,5 @@ if __name__=='__main__':
 	print('Tested with IMOD 4.9 only')
 	
 	args = parser.parse()
+	     
+	binFactor = float(args.bin)
