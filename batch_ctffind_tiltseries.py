@@ -6,12 +6,12 @@ Created on Sat Dec  4 22:56:14 2021
 Script to run ctffind4 (version 4.1.2) on a batch of tilt series. Change the function run_cttfind according to your ctffind version
 It is possible to use wild card to select a subset of tilt series
 Usage: batch_ctffind_tiltseries.py --i TS_01/TS_01.mrc --angpix 2.12 --ctffind_exe /storage/software/ctffind4/ctffind --cs 2.7 --voltage 300 --amp 0.07 --minres 50 --maxres 5 --dmin 10000 --dmax 60000
-Usage: batch_ctffind_tiltseries.py --i TS*/TS*.mrc --angpix 2.12 -ctffind_exe /storage/software/ctffind4/ctffind 
+Usage: batch_ctffind_tiltseries.py --i "TS*/TS*.mrc" --angpix 2.12 -ctffind_exe /storage/software/ctffind4/ctffind 
 
 Edit other parameter inside the files
 @author: Huy Bui, McGill
 """
-import argparse, os
+import argparse, os, glob
 
 
 def run_ctffind(ctffind_exe, tsName, angpix, cs, voltage, amp, tile, minres, maxres, dmin, dmax):
@@ -50,7 +50,8 @@ if __name__=='__main__':
 	parser.add_argument('--dmax', help='Maximum defocus (Angstrom)',required=False,default='60000')
   
 	args = parser.parse_args()
-	tsList = args.i.split(' ')
+	
+	tsList = glob.glob(args.i)
   
 	currentDir = os.getcwd()
   
