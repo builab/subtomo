@@ -31,7 +31,7 @@ def run_ctffind(ctffind_exe, tsName, angpix, cs, voltage, amp, tile, minres, max
 	out.write('{:s}\n'.format(dmin))
 	out.write('{:s}\n'.format(dmax))
 	out.write('100\n')
-	out.write('no\nno\nno\nno\no\nEOF\n')
+	out.write('no\nno\nno\nno\nno\nEOF\n')
 	out.close()
 	
 
