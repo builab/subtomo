@@ -14,7 +14,7 @@ Edit other parameter inside the files
 import argparse, os
 
 
-def run_ctffind(ctffind_exe, tsName, angpix, cs, voltage, amp, tile, dmin, dmax)
+def run_ctffind(ctffind_exe, tsName, angpix, cs, voltage, amp, tile, minres, maxres, dmin, dmax):
 	"""Run ctffind"""
 	out = open('ctffind.com', 'w')
 	out.write(args.ctffind_exe + ' <<EOF\n')
