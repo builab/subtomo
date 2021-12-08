@@ -57,7 +57,7 @@ if __name__=='__main__':
 	for tiltseries in tsList:
 		tsName = os.path.basename(tiltseries)
 		if not tsName.endswith('.mrc'):
-			print(tiltseries + ' . Error: Only mrc file supported')
+			print('Processing ' + tsName + ': ERROR! Only mrc file supported')
 			break
 		tsPath = os.path.dirname(tiltseries)
 		os.chdir(tsPath)
