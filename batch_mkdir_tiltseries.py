@@ -8,7 +8,7 @@ Move .mrc file into folders
 
 @author: Huy Bui, McGill
 """
-import argparse, os, glob
+import argparse, os, glob, shutil
 
 if __name__=='__main__':
 	parser = argparse.ArgumentParser(description='Organize tilt series into folders')
@@ -22,10 +22,15 @@ if __name__=='__main__':
 			break
 		tsName = tiltseries.replace('.mrc', '')
 		mrcDoc = tiltseries.replace('.mrc', '.mrc.mdoc')
-		os.mkdir(tsName)
+		try:
+			os.mkdir(tsName)
+		except OSError as exc:
+			if exc.errno != errno.EEXIST:
+				raise
+			pass
 		# Move tilt series
 		print('mv ' + tiltseries + ' ' + os.path.join(tsName, tiltseries))
-		shutil.move(tiltseries, os.path.join(tsName, tiltseries))\
+		shutil.move(tiltseries, os.path.join(tsName, tiltseries))
 		print('mv ' + mrcDoc + ' ' + os.path.join(tsName, mrcDoc))
 		shutil.move(mrcDoc, os.path.join(tsName, mrcDoc))
 
