@@ -14,6 +14,7 @@ if __name__=='__main__':
 	parser = argparse.ArgumentParser(description='Organize tilt series into folders')
 	parser.add_argument('--i', help='Input Tilt Series Wild Card',required=True)
 	
+	args = parser.parse_args()
 	tsList = glob.glob(args.i)
 	for tiltseries in tsList:
 		if not tsName.endswith('.mrc'):
