@@ -17,7 +17,7 @@ if __name__=='__main__':
 	args = parser.parse_args()
 	tsList = glob.glob(args.i)
 	for tiltseries in tsList:
-		if not tsName.endswith('.mrc'):
+		if not tiltseries.endswith('.mrc'):
 			print('Processing ' + tiltseries + ': ERROR! Only mrc file supported')
 			break
 		tsName = tiltseries.replace('.mrc', '')
