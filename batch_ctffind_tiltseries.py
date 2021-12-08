@@ -61,6 +61,7 @@ if __name__=='__main__':
 			print('Processing ' + tsName + ': ERROR! Only mrc file supported')
 			break
 		tsPath = os.path.dirname(tiltseries)
+		print('Change dir to ' + tsPath)
 		os.chdir(tsPath)
 		print('Processing ' + tiltseries + ' ...')
 		run_ctffind(args.ctffind_exe, tsName, args.angpix, args.cs, args.voltage, args.amp, args.tile, args.minres, args.maxres, args.dmin, args.dmax)
