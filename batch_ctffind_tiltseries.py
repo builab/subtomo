@@ -20,7 +20,7 @@ def run_ctffind(ctffind_exe, tsName, angpix, cs, voltage, amp, tile, minres, max
 	out.write(args.ctffind_exe + ' <<EOF\n')
 	out.write('{:s}\n'.format(tsName))
 	out.write('no\n')
-	out.write('{:s}\n'.format(tsName.replace('.mrc', '_output.mrc'))
+	out.write('{:s}\n'.format(tsName.replace('.mrc', '_output.mrc')))
 	out.write('{:s}\n'.format(angpix))
 	out.write('{:s}\n'.format(voltage))
 	out.write('{:s}\n'.format(cs))
