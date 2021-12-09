@@ -45,7 +45,7 @@ def run_tilt(baseName, tempCont):
 		#elif line.startswith('THICKNESS'):
 		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
-			outCom.write('XTILFILE\t{:s}.xtilt\n'.format(baseName))
+			outCom.write('XTILTFILE\t{:s}.xtilt\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()		
@@ -77,7 +77,7 @@ def run_tilt_3dfind(baseName, tempCont):
 		#elif line.startswith('THICKNESS'):
 		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
-			outCom.write('XTILFILE\t{:s}.xtilt\n'.format(baseName))
+			outCom.write('XTILTFILE\t{:s}.xtilt\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()		     
