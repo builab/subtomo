@@ -20,11 +20,11 @@ def run_newst(baseName, tempCont):
 	outCom = open(operation + '.com', 'w')
 	for line in tempCont:
 		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName)
+			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_ali.mrc\n'.format(baseName)
+			outCom.write('OutputFile\t{:s}_ali.mrc\n'.format(baseName))
 		elif line.startswith('TransformFile'):
-			outCom.write('TransformFile\t{:s}.xf\n'.format(baseName)
+			outCom.write('TransformFile\t{:s}.xf\n'.format(baseName))
 		#elif line.startswith('BinByFactor'):
 		#	outCom.write('BinByFactor\t{:d}.xf\n'.format(binFactor)
 		else:
@@ -37,15 +37,15 @@ def run_tilt(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputProjections'):
-			outCom.write('InputProjections\t{:s}_ali.mrc\n'.format(baseName)
+			outCom.write('InputProjections\t{:s}_ali.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_full_rec.mrc\n'.format(baseName)
+			outCom.write('OutputFile\t{:s}_full_rec.mrc\n'.format(baseName))
 		elif line.startswith('TILTFILE'):
-			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName)
+			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName))
 		#elif line.startswith('THICKNESS'):
 		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
-			outCom.write('XTILFILE\t{:s}.xtilt\n'.format(baseName)
+			outCom.write('XTILFILE\t{:s}.xtilt\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()		
@@ -55,11 +55,11 @@ def run_newst_3dfind(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}_3dfind_rec.mrc\n'.format(baseName)
+			outCom.write('InputFile\t{:s}_3dfind_rec.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_3dfind.mod\n'.format(baseName)
+			outCom.write('OutputFile\t{:s}_3dfind.mod\n'.format(baseName))
 		elif line.startswith('TransformFile'):
-			outCom.write('TransformFile\t{:s}.xf\n'.format(baseName)
+			outCom.write('TransformFile\t{:s}.xf\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()	
@@ -69,15 +69,15 @@ def run_tilt_3dfind(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputProjections'):
-			outCom.write('InputProjections\t{:s}_3dfind_ali.mrc\n'.format(baseName)
+			outCom.write('InputProjections\t{:s}_3dfind_ali.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_3dfind_rec.mrc\n'.format(baseName)
+			outCom.write('OutputFile\t{:s}_3dfind_rec.mrc\n'.format(baseName))
 		elif line.startswith('TILTFILE'):
-			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName)
+			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName))
 		#elif line.startswith('THICKNESS'):
 		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
-			outCom.write('XTILFILE\t{:s}.xtilt\n'.format(baseName)
+			outCom.write('XTILFILE\t{:s}.xtilt\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()		     
@@ -87,9 +87,9 @@ def run_findbead3d(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName)
+			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_3dfind_ali.mrc\n'.format(baseName)
+			outCom.write('OutputFile\t{:s}_3dfind_ali.mrc\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()	
@@ -99,13 +99,13 @@ def run_tilt_3dfind_reproject(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}_3dfind_ali.mrc\n'.format(baseName)
+			outCom.write('InputFile\t{:s}_3dfind_ali.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_erase.fid\n'.format(baseName)
+			outCom.write('OutputFile\t{:s}_erase.fid\n'.format(baseName))
 		elif line.startswith('TILTFILE'):
-			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName)
+			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName))
 		elif line.startswith('ProjectModel'):
-			outCom.write('ProjectModel\t{:s}_3dfind.mod\n'.format(baseName)
+			outCom.write('ProjectModel\t{:s}_3dfind.mod\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()	
@@ -115,18 +115,18 @@ def run_golderaser(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}_ali.mrc\n'.format(baseName)
+			outCom.write('InputFile\t{:s}_ali.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_erase_ali.mrc\n'.format(baseName)
+			outCom.write('OutputFile\t{:s}_erase_ali.mrc\n'.format(baseName))
 		elif line.startswith('ModelFile'):
-			outCom.write('ModelFile\t{:s}_erase.fid\n'.format(baseName)				     
+			outCom.write('ModelFile\t{:s}_erase.fid\n'.format(baseName))			     
 		else:
 			outCom.write(line)
 	outCom.close()
 				     
 def run_trimvol(baseName, tempCont):
 	outCom = open('golderaser.com', 'w')
-	outCom.write('$trimvol -f -rx {:s}_full_rec.mrc {:s}_rec.mrc'.format(baseName, baseName)
+	outCom.write('$trimvol -f -rx {:s}_full_rec.mrc {:s}_rec.mrc'.format(baseName, baseName))
 	outCom.close()
   	
 
