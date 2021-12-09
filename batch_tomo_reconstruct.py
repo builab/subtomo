@@ -155,13 +155,13 @@ if __name__=='__main__':
 	for tiltseries in tsList:
 		tsName = os.path.basename(tiltseries)
 		if not tiltseries.endswith('.mrc'):
-			print('Processing ' + tiltseries + ': ERROR! Only mrc file supported')
+			print('---> Processing ' + tiltseries + ': ERROR! Only mrc file supported')
 			break
 		baseName = tsName.replace('.mrc','')
 		tsPath = os.path.dirname(tiltseries)
+		print('---> Processing ' + tiltseries + ' ...')
 		print('Change dir to ' + tsPath)
 		os.chdir(tsPath)
-		print('Processing ' + tiltseries + ' ...')
 		if operation == 'newst':
 			run_newst(baseName, tempCont)
 			os.system('submfg newst.com')
