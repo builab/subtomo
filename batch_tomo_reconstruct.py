@@ -164,28 +164,28 @@ if __name__=='__main__':
 		print('Processing ' + tiltseries + ' ...')
 		if operation == 'newst':
 			run_newst(baseName, tempCont)
-			system('submfg newst.com')
+			os.system('submfg newst.com')
 		elif operation == 'tilt':
 			run_tilt(baseName, tempCont)
-			system('submfg tilt.com')
+			os.system('submfg tilt.com')
 		if operation == 'newst_3dfind':
 			run_newst_3dfind(baseName, tempCont)
-			system('submfg newst_3dfind.com')
+			os.system('submfg newst_3dfind.com')
 		elif operation == 'tilt_3dfind':
 			run_tilt_3dfind(baseName, tempCont)
-			system('submfg tilt_3dfind.com')
+			os.system('submfg tilt_3dfind.com')
 		if operation == 'newst_3dfind':
 			run_findbeads3d(baseName, tempCont)
-			system('submfg findbeads3d.com')
+			os.system('submfg findbeads3d.com')
 		elif operation == 'tilt_3dfind_reproject':
 			run_tilt_3dfind_reproject(baseName, tempCont)
-			system('submfg tilt_3dfind_reproject.com')
+			os.system('submfg tilt_3dfind_reproject.com')
 		elif operation == 'golderaser':
 			run_tilt_3dfind_reproject(baseName, tempCont)
-			system('submfg golderaser.com')
+			os.system('submfg golderaser.com')
 		elif operation == 'trimvol':
 			run_trimvol(baseName, tempCont)
-			system('submfg trimvol.com')
+			os.system('submfg trimvol.com')
 		else:
 			print('Unknown option')
 			exit(1)
