@@ -134,7 +134,7 @@ if __name__=='__main__':
 	parser = argparse.ArgumentParser(description='Batch tomo reconstruct using IMOD')
 	parser.add_argument('--i', help='Input Tilt Series',required=True)
 	parser.add_argument('--operation', help='Imod operation (newst/tilt/newst_3dfind/tilt_3dfind/findbeads3d/tilt_3dfind_reproject/golderaser/trimvol)',required=True)
-	parser.add_argument('--bin', help='Bin factor',required=True)			     
+	#parser.add_argument('--bin', help='Bin factor',required=True)			     
 	parser.add_argument('--template', help='Template file from 1 reconstruction',required=True)
 	parser.add_argument('--noproc', help='Number of processors',required=False, default=1)
 
