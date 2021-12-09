@@ -42,8 +42,8 @@ def run_tilt(operation, tsName, tempCont):
 			outCom.write('OutputFile\t{:s}_full_rec.mrc\n'.format(baseName)
 		elif line.startswith('TILTFILE'):
 			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName)
-		elif line.startswith('THICKNESS'):
-			outCom.write('THICKNESS\t{:s}\n'.format(thickness)
+		#elif line.startswith('THICKNESS'):
+		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
 			outCom.write('XTILFILE\t{:s}.xtilt\n'.format(baseName)
 		else:
