@@ -181,7 +181,7 @@ if __name__=='__main__':
 			run_tilt_3dfind_reproject(baseName, tempCont)
 			os.system('submfg tilt_3dfind_reproject.com')
 		elif operation == 'golderaser':
-			run_tilt_3dfind_reproject(baseName, tempCont)
+			run_golderaser(baseName, tempCont)
 			os.system('submfg golderaser.com')
 		elif operation == 'trimvol':
 			run_trimvol(baseName, tempCont)
