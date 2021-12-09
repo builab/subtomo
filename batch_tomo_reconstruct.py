@@ -55,9 +55,9 @@ def run_newst_3dfind(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}_3dfind_rec.mrc\n'.format(baseName))
+			outCom.write('InputFile\t{:s}_ali.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_3dfind.mod\n'.format(baseName))
+			outCom.write('OutputFile\t{:s}_3dfind_ali.mrc\n'.format(baseName))
 		elif line.startswith('TransformFile'):
 			outCom.write('TransformFile\t{:s}.xf\n'.format(baseName))
 		else:
@@ -87,9 +87,9 @@ def run_findbead3d(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
+			outCom.write('InputFile\t{:s}_3dfind_rec.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_3dfind_ali.mrc\n'.format(baseName))
+			outCom.write('OutputFile\t{:s}_3dfind.mod\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()	
