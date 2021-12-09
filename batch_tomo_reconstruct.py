@@ -82,7 +82,7 @@ def run_tilt_3dfind(baseName, tempCont):
 			outCom.write(line)
 	outCom.close()		     
 				    
-def run_findbead3d(baseName, tempCont):
+def run_findbeads3d(baseName, tempCont):
 	outCom = open('findbeads3d.com', 'w')	
 				     
 	for line in tempCont:
