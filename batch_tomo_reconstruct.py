@@ -147,6 +147,7 @@ if __name__=='__main__':
 	     	
 	tempfile = open(args.template, 'r')
 	tempCont = tempfile.readlines()
+	operation = args.operation
 	
 	currentDir = os.getcwd()
 
