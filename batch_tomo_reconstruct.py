@@ -144,9 +144,7 @@ if __name__=='__main__':
 	print('Only tested with IMOD 4.9 and 4.11.8 only')
 	
 	args = parser.parse_args()
-	     
-	binFactor = int(args.bin)
-	
+	     	
 	tempfile = open(args.template, 'r')
 	tempCont = tempfile.readlines()
 	
