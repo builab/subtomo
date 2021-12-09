@@ -168,13 +168,13 @@ if __name__=='__main__':
 		elif operation == 'tilt':
 			run_tilt(baseName, tempCont)
 			os.system('submfg tilt.com')
-		if operation == 'newst_3dfind':
+		elif operation == 'newst_3dfind':
 			run_newst_3dfind(baseName, tempCont)
 			os.system('submfg newst_3dfind.com')
 		elif operation == 'tilt_3dfind':
 			run_tilt_3dfind(baseName, tempCont)
 			os.system('submfg tilt_3dfind.com')
-		if operation == 'newst_3dfind':
+		elif operation == 'newst_3dfind':
 			run_findbeads3d(baseName, tempCont)
 			os.system('submfg findbeads3d.com')
 		elif operation == 'tilt_3dfind_reproject':
