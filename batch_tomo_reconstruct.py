@@ -98,8 +98,8 @@ def run_tilt_3dfind_reproject(baseName, tempCont):
 	outCom = open('tilt_3dfind_reproject.com', 'w')	
 				     
 	for line in tempCont:
-		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}_3dfind_ali.mrc\n'.format(baseName))
+		if line.startswith('InputProjections'):
+			outCom.write('InputProjections\t{:s}_3dfind_ali.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
 			outCom.write('OutputFile\t{:s}_erase.fid\n'.format(baseName))
 		elif line.startswith('TILTFILE'):
