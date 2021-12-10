@@ -55,7 +55,7 @@ def run_newst_3dfind(baseName, tempCont):
 				     
 	for line in tempCont:
 		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}_ali.mrc\n'.format(baseName))
+			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
 			outCom.write('OutputFile\t{:s}_3dfind_ali.mrc\n'.format(baseName))
 		elif line.startswith('TransformFile'):
