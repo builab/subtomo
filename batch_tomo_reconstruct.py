@@ -127,7 +127,7 @@ def run_golderaser(baseName, tempCont):
 	outCom.close()
 				     
 def run_trimvol(baseName, tempCont):
-	outCom = open('golderaser.com', 'w')
+	outCom = open('trimvol.com', 'w')
 	outCom.write('$trimvol -f -rx {:s}_full_rec.mrc {:s}_rec.mrc'.format(baseName, baseName))
 	outCom.close()
   	
