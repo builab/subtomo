@@ -51,23 +51,8 @@ def run_tilt(baseName, tempCont):
 	outCom.close()	
 	
 				     
-def run_tiltsirt(baseName, tempCont):
-	outCom = open('tilt_sirt.com', 'w')	
-				     
-	for line in tempCont:
-		if line.startswith('InputProjections'):
-			outCom.write('InputProjections\t{:s}_ali.mrc\n'.format(baseName))
-		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_full_rec.mrc\n'.format(baseName))
-		elif line.startswith('TILTFILE'):
-			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName))
-		#elif line.startswith('THICKNESS'):
-		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
-		elif line.startswith('XTILTFILE'):
-			outCom.write('XTILTFILE\t{:s}.xtilt\n'.format(baseName))
-		else:
-			outCom.write(line)
-	outCom.close()	
+def run_tilt_for_sirt(baseName, tempCont):
+	# Not doing anything yet
 		
 def run_newst_3dfind(baseName, tempCont):
 	outCom = open('newst_3dfind.com', 'w')	
