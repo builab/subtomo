@@ -104,6 +104,8 @@ def run_tilt_3dfind_reproject(baseName, tempCont):
 			outCom.write('OutputFile\t{:s}_erase.fid\n'.format(baseName))
 		elif line.startswith('TILTFILE'):
 			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName))
+		elif line.startswith('XTILTFILE'):
+			outCom.write('XTILTFILE\t{:s}.xtilt\n'.format(baseName))
 		elif line.startswith('ProjectModel'):
 			outCom.write('ProjectModel\t{:s}_3dfind.mod\n'.format(baseName))
 		else:
