@@ -11,7 +11,7 @@ This is used specifically for K3 in McGill. Imod 4.11.8
 @author: Huy Bui, McGill
 """
 
-import argparse, os, glob
+import argparse, os, glob, shutil
 from multiprocessing import Pool
 
 
