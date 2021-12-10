@@ -185,9 +185,9 @@ if __name__=='__main__':
 		elif operation == 'golderaser':
 			run_golderaser(baseName, tempCont)
 			os.system('submfg golderaser.com')
-			shutil.move(basename + '_ali.mrc', basename + '_ali.mrc~')
-			print('mv ' + basename + '_erase_ali.mrc ' + basename + '_ali.mrc')
-			shutil.move(basename + '_erase_ali.mrc', basename + '_ali.mrc')
+			shutil.move(baseName + '_ali.mrc', baseName + '_ali.mrc~')
+			print('mv ' + baseName + '_erase_ali.mrc ' + baseName + '_ali.mrc')
+			shutil.move(baseName + '_erase_ali.mrc', baseName + '_ali.mrc')
 		elif operation == 'trimvol':
 			run_trimvol(baseName, tempCont)
 			os.system('submfg trimvol.com')
