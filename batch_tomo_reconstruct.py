@@ -51,7 +51,7 @@ def run_tilt(baseName, tempCont):
 	outCom.close()	
 	
 				     
-def run_tilt_for_sirt(baseName, tempCont):
+#def run_tilt_for_sirt(baseName, tempCont):
 	# Not doing anything yet
 		
 def run_newst_3dfind(baseName, tempCont):
