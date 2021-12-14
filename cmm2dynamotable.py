@@ -38,7 +38,9 @@ if __name__=='__main__':
 		listpar.append(int(marker.attrib['id']) - 1)
 		
 	#listnp = np.array(listpar)
-	outtable=intable[np.isin(intable[:,1], listpar)]	
+	outtable=intable[np.isin(intable[:,1], listpar)]
+	print(outtable)
+	print(listpar)
 	#outtable = intable[listpar, :]
 	print('Writing ' + args.o)
 	np.savetxt(args.o, outtable, fmt='%.2f', delimiter=' ')
