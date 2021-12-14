@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Dec  6 13:33:47 2021
-Fixed Dec 13, non-continous subtomo number
+Fixed Dec 13, non-continous subtomo number using np.asis
 
 Trim the Dynamo table based on a Chimera cmm file
 Using dynamo_table2cmm to generate the cmm file from 1 tomogram
