@@ -39,7 +39,7 @@ if __name__=='__main__':
 		
 	#listnp = np.array(listpar)
 	outtable=intable[np.isin(intable[:,1], listpar)]
-	print(outtable)
+	print(intable[:,1])
 	print(listpar)
 	#outtable = intable[listpar, :]
 	print('Writing ' + args.o)
