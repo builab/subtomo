@@ -35,13 +35,12 @@ if __name__=='__main__':
 	listpar = []
 	# Obtain all marker id
 	for marker in root.iter('marker'):
-		listpar.append(int(marker.attrib['id']) - 1)
+		listpar.append(int(marker.attrib['id']))
 		
 	#listnp = np.array(listpar)
 	outtable=intable[np.isin(intable[:, 0], listpar)]
 	#print(intable[:, 0])
-	#print(listpar)
-	#outtable = intable[listpar, :]
+	print(listpar)
 	print('Writing ' + args.o)
 	np.savetxt(args.o, outtable, fmt='%.2f', delimiter=' ')
 	
