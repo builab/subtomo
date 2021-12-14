@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Dec  6 13:33:47 2021
+Fixed Dec 13, non-continous subtomo number
 
 Trim the Dynamo table based on a Chimera cmm file
 Using dynamo_table2cmm to generate the cmm file from 1 tomogram
@@ -37,7 +38,8 @@ if __name__=='__main__':
 		listpar.append(int(marker.attrib['id']) - 1)
 		
 	#listnp = np.array(listpar)
-	outtable = intable[listpar, :]
+	outtable=intable[np.isin(intable[:,1], listpar)]	
+	#outtable = intable[listpar, :]
 	print('Writing ' + args.o)
 	np.savetxt(args.o, outtable, fmt='%.2f', delimiter=' ')
 	
