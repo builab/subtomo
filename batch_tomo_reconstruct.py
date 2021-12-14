@@ -3,8 +3,8 @@
 """
 Created on Dec 8 2021
 Script to run batch imod through the command line
-Only use for newst & tilt & tilt_sirt for now
-For now, use a default template but should be flexible in the future for generating different bin tomo
+For now, use a default template only and no tilt sirt
+TODO: implement multiprocessing for cluster submission
 
 This is used specifically for K3 in McGill. Imod 4.11.8
 
