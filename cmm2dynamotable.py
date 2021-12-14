@@ -38,7 +38,7 @@ if __name__=='__main__':
 		listpar.append(int(marker.attrib['id']) - 1)
 		
 	#listnp = np.array(listpar)
-	outtable=intable[np.isin(intable[:,1], listpar)]
+	outtable=intable[np.isin(intable[:, 0], listpar)]
 	print(intable[:,1])
 	print(listpar)
 	#outtable = intable[listpar, :]
