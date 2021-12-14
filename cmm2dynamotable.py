@@ -41,6 +41,6 @@ if __name__=='__main__':
 	outtable=intable[np.isin(intable[:, 0], listpar)]
 	#print(intable[:, 0])
 	#print(listpar)
-	print('Writing {:d} particles to {:s}\n'.format(len(listpar), args.o))
+	print('\nWriting {:d} particles to {:s}!'.format(len(listpar), args.o))
 	np.savetxt(args.o, outtable, fmt='%.2f', delimiter=' ')
 	
