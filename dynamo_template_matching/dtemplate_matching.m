@@ -1,5 +1,6 @@
 %
 % Script to loop through all the tomogram from tomograms.vll for template maching
+% Can be run local but on cluster as well
 %
 
 % Input
