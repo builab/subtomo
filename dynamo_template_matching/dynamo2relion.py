@@ -44,6 +44,7 @@ if __name__=='__main__':
 	args = parser.parse_args()
 	pixelSize = float(args.angpix)
 	binFactor = float(args.bin)
+
 	
 	tomodoc_header=["TomoNo", "TomoPath"]
 	df_tomolist = pd.read_csv(args.tomodoc, delim_whitespace=True, names=tomodoc_header, index_col=False)
@@ -86,5 +87,21 @@ if __name__=='__main__':
 	write_star_4(df_all, args.ostar)
 	
 	# Making tomogram_desc.star	
-
+	descr_header = ["TomoName", "TomoTiltSeriesName", "TomoImportCtfFindFile", "TomoImportImodDir", "TomoImportFractionalDose", "TomoImportOrderList", "TomoImportCulledFile"]
+	df_descr = pd.DataFrame(columns =descr_header)
+	orderList = '
+	for idx in range(len(df_tomolist)):	
+		tomoPath = df_tomolist.loc[idx, 'TomoPath'];
+		tomoNum = df_tomolist.loc[idx, 'TomoNo'];
+		tomoName = os.path.basename(tomoPath)
+		tomoName = tomoName.replace('_rec.mrc', '') 
+		tsName = "tomograms/{:s}/{:s}.mrc".format(tomoName, tomoName)
+		ctfFile = "tomograms/{:s}/{:s}_output.txt".format(tomoName, tomoName)
+		imodDir = "tomograms/{:s}".format(tomoName)
+		orderList = "input\/order_list.csv"
+		cullMrc = "tomograms/{:s}/{:s}_culled.mrc".format(tomoName, tomoName)	
+		df_descr = df_descrp.append([tomoName, tsName, ctfFind, imodDir, args.frac_dose, orderList, cullMrc]);
+		
+	print("Writing tomogram description tomograms_desc.star\n")
+	write_star_4(df_descr, 'tomograms_descr.star')
 	
