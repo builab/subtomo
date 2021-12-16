@@ -17,8 +17,8 @@ nTomo = length(listTomo); % get total number of tomogramsmkdir(outDir)
 for i = 1:nTomo
 	tomo = listTomo{i};
 	[tomoPath, tomoName, ext] = fileparts(tomo);
-    pts = dread([tomoName '.TM/process.mat']);
-    myTable = pts.peaks.computeTable('mcc',threshold);
+	pts = dread([tomoName '.TM/process.mat']);
+	myTable = pts.peaks.computeTable('mcc',threshold);
 	tableOriginalScale = dynamo_table_rescale(myTable,'factor',2);
 	disp([outDir '/' tomoName '_peaks.tbl'])
 	dwrite(tableOriginalScale, [outDir '/' tomoName '_peaks.tbl']);
