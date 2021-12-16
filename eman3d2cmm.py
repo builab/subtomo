@@ -28,9 +28,9 @@ if __name__=='__main__':
 	
 	out.write("<marker_set name=\"marker set 1\">\n")
 	for i in range(len(df['X'])):
-		x = float(df[i, 'X'])*binFactor
-		y = float(df[i, 'Y'])*binFactor
-		z = float(df[i, 'Z'])*binFactor
+		x = float(df.loc[i, 'X'])*binFactor
+		y = float(df.loc[i, 'Y'])*binFactor
+		z = float(df.loc[i, 'Z'])*binFactor
 		out.write("<marker id=\"{:d}\" x=\"{:.1f}\" y=\"{:.1f}\" z=\"{:.1f}\" radius=\"{:d}\"/>\n".format(i + 1, x, y, z, radius))
 		
 	out.write("</marker_set>\n")
