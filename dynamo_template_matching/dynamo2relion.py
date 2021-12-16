@@ -7,7 +7,7 @@
 
 import numpy as np
 import pandas as pd
-import argparse
+import argparse, os
 
 from eulerangles import euler2matrix
 from eulerangles import matrix2euler
