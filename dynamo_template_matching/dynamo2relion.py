@@ -89,7 +89,6 @@ if __name__=='__main__':
 	# Making tomogram_desc.star	
 	descr_header = ["TomoName", "TomoTiltSeriesName", "TomoImportCtfFindFile", "TomoImportImodDir", "TomoImportFractionalDose", "TomoImportOrderList", "TomoImportCulledFile"]
 	df_descr = pd.DataFrame(columns =descr_header)
-	orderList = '
 	for idx in range(len(df_tomolist)):	
 		tomoPath = df_tomolist.loc[idx, 'TomoPath'];
 		tomoNum = df_tomolist.loc[idx, 'TomoNo'];
