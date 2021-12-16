@@ -99,7 +99,7 @@ if __name__=='__main__':
 		imodDir = "tomograms/{:s}".format(tomoName)
 		orderList = "input\/order_list.csv"
 		cullMrc = "tomograms/{:s}/{:s}_culled.mrc".format(tomoName, tomoName)	
-		df_descr = df_descrp.append([tomoName, tsName, ctfFind, imodDir, args.frac_dose, orderList, cullMrc]);
+		df_descr.append([tomoName, tsName, ctfFind, imodDir, args.frac_dose, orderList, cullMrc]);
 		
 	print("Writing tomogram description tomograms_desc.star\n")
 	write_star_4(df_descr, 'tomograms_descr.star')
