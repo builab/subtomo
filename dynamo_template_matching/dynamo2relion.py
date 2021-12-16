@@ -59,20 +59,22 @@ if __name__=='__main__':
 	tbl = np.genfromtxt(args.tbl, delimiter=' ')
 	# Set ClassNumber to 1
 	tbl[:,21] = tbl[:,21]*0 + 1
+	tbl[:,23:26] = tbl[:,23:26]*binFactor # Take care of binning
 	eulers_dynamo = tbl[:,6:9]
 	eulers_relion = convert_eulers(eulers_dynamo, source_meta='dynamo', target_meta='warp')
+	print(eulers_relion)
 	df_all['TomoName'] = tbl[:,19].astype(int)
-	df_all['CoordinateX'] = tbl[:,23]*binFactor;
-	df_all['CoordinateY'] = tbl[:,24]*binFactor;
-	df_all['CoordinateZ'] = tbl[:,25]*binFactor;
+	df_all['CoordinateX'] = tbl[:,23].astype(int);
+	df_all['CoordinateY'] = tbl[:,24].astype(int);
+	df_all['CoordinateZ'] = tbl[:,25].astype(int);
 	df_all['OriginXAngst'] = tbl[:,3]*0;
 	df_all['OriginYAngst'] = tbl[:,4]*0;
 	df_all['OriginZAngst'] = tbl[:,5]*0;
 	df_all['ClassNumber'] = tbl[:,21].astype(int);
-	df_all['TomoManifoldIndex'] = tbl[:,21].astype(int); # Place holder, no use
-	df_all['AngleRot'] = eulers_relion[:,0]
-	df_all['AngleTilt'] = eulers_relion[:,1]
-	df_all['AnglePsi'] = eulers_relion[:,2]
+	df_all['TomoManifoldIndex'] = tbl[:,21].astype(int) # Place holder, no use
+	df_all['AngleRot'] = eulers_relion[:,0].astype(int) # Temporary convert
+	df_all['AngleTilt'] = eulers_relion[:,1].astype(int) # Temporary convert
+	df_all['AnglePsi'] = eulers_relion[:,2].astype(int) # Temporary convert
 	df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
 	
 	#print(df_all)
