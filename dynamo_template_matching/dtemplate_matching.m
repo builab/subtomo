@@ -29,8 +29,8 @@ local_cluster.NumWorkers = NumWorkers;
 for i = 1:nTomo
 	tomo = listTomo{i};
 	[tomoPath, tomoName, ext] = fileparts(tomo);
-  % Assumming name of IMOD 4.11
-  tomoName = strrep(tomoName, '_rec', '');
+	% Assumming name of IMOD 4.11
+	tomoName = strrep(tomoName, '_rec', '');
 	disp(tomoName)
 	pts = dynamo_match(tomo, ref,'mask', mask, 'outputFolder', tomoName, 'ytilt',[-60,60],'sc',[256,256,256],'cr',360,'cs',30,'ir', 40,'bin',1,'mw', local_cluster.NumWorkers);
 	%pts = dynamo_match(tomo, ref,'mask', mask, 'outputFolder', tomoName, 'ytilt',[-60,60],'sc',[256,256,256],'cr',360,'cs',30,'bin',1,'mw', local_cluster.NumWorkers);
