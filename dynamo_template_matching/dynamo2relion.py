@@ -62,7 +62,7 @@ if __name__=='__main__':
 	tbl[:,23:26] = tbl[:,23:26]*binFactor # Take care of binning
 	eulers_dynamo = tbl[:,6:9]
 	eulers_relion = convert_eulers(eulers_dynamo, source_meta='dynamo', target_meta='warp')
-	print(eulers_relion)
+	#print(eulers_relion)
 	df_all['TomoName'] = tbl[:,19].astype(int)
 	df_all['CoordinateX'] = tbl[:,23].astype(int);
 	df_all['CoordinateY'] = tbl[:,24].astype(int);
