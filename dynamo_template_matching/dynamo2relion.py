@@ -54,9 +54,12 @@ if __name__=='__main__':
 		
 	# Renumber
 	tbl = np.genfromtxt(args.tbl, delimiter=' ')
+	# Set ClassNumber to 1
+	tbl[:,21] = tbl[:,21]*0 + 1
+	
 	eulers_dynamo = tbl[:,6:9]
 	eulers_relion = convert_eulers(eulers_dynamo, source_meta='dynamo', target_meta='warp')
-	df_all['TomoName'] = tbl[:,20];
+	df_all['TomoName'] = tbl[:, 19];
 	df_all['CoordinateX'] = tbl[:,23]*binFactor;
 	df_all['CoordinateY'] = tbl[:,24]*binFactor;
 	df_all['CoordinateZ'] = tbl[:,25]*binFactor;
