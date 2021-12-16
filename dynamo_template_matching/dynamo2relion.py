@@ -75,13 +75,11 @@ if __name__=='__main__':
 	#print(df_all)
 	
 	# Loop through tomoName to replace with name
-	for idx in range(len(df_tomolist)):
-		print(idx)
-	
-	tomoPath = df_tomolist.loc[idx, 'TomoPath'];
-	tomoNum = df_tomolist.loc[idx, 'TomoNo'];
-	tomoName = os.path.basename(tomoPath)
-	tomoName = tomoName.replace('_rec.mrc', '.mrc') 
-	df_all["TomoName"].replace({tomoNum:tomoName}, inplace=True)
+	for idx in range(len(df_tomolist)):	
+		tomoPath = df_tomolist.loc[idx, 'TomoPath'];
+		tomoNum = df_tomolist.loc[idx, 'TomoNo'];
+		tomoName = os.path.basename(tomoPath)
+		tomoName = tomoName.replace('_rec.mrc', '') 
+		df_all["TomoName"].replace({tomoNum:tomoName}, inplace=True)
 	
 	write_star_4(df_all, args.ostar) 
