@@ -75,7 +75,7 @@ if __name__=='__main__':
 	#print(df_all)
 	
 	# Loop through tomoName to replace with name
-	for idx in len(df_tomolist):
+	for idx in range(len(df_tomolist)):
 		print(idx)
 	
 	tomoPath = df_tomolist.loc[idx, 'TomoPath'];
