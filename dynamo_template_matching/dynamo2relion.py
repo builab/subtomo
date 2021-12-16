@@ -58,15 +58,15 @@ if __name__=='__main__':
 	tbl[:,21] = tbl[:,21]*0 + 1
 	eulers_dynamo = tbl[:,6:9]
 	eulers_relion = convert_eulers(eulers_dynamo, source_meta='dynamo', target_meta='warp')
-	df_all['TomoName'] = tbl[:,19].astype(int16)
+	df_all['TomoName'] = tbl[:,19].astype(int)
 	df_all['CoordinateX'] = tbl[:,23]*binFactor;
 	df_all['CoordinateY'] = tbl[:,24]*binFactor;
 	df_all['CoordinateZ'] = tbl[:,25]*binFactor;
 	df_all['OriginXAngst'] = tbl[:,3]*0;
 	df_all['OriginYAngst'] = tbl[:,4]*0;
 	df_all['OriginZAngst'] = tbl[:,5]*0;
-	df_all['ClassNumber'] = tbl[:,21].astype(int16);
-	df_all['TomoManifoldIndex'] = tbl[:,21].astype(int16); # Place holder, no use
+	df_all['ClassNumber'] = tbl[:,21].astype(int);
+	df_all['TomoManifoldIndex'] = tbl[:,21].astype(int); # Place holder, no use
 	df_all['AngleRot'] = eulers_relion[:,0]
 	df_all['AngleTilt'] = eulers_relion[:,1]
 	df_all['AnglePsi'] = eulers_relion[:,2]
