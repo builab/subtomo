@@ -1,7 +1,6 @@
 #/usr/bin/python3
-# Convert the entire cilia from AA to relion4
-# HB 11/2021
-# Still not yet convert the shift
+# Convert a list of EMAN2 3D coordinate to relion4
+# HB 12/2021
 
 import numpy as np
 import pandas as pd
@@ -91,10 +90,10 @@ if __name__=='__main__':
 	print('Script to convert from AxonemeAlign to Relion. HB 2021')
 	
 	parser = argparse.ArgumentParser(description='Convert doc & star file to Relion 4.0 input file')
-	parser.add_argument('--i', help='Input list file',required=True)
+	parser.add_argument('--i', help='Input folder of eman3D coordinate',required=True)
 	parser.add_argument('--ostar', help='Output star file',required=True)
 	parser.add_argument('--angpix', help='Input pixel size',required=True)
-	parser.add_argument('--bin', help='Bin of current tomo',required=True)
+	parser.add_argument('--bin', help='Bin of current coordinate',required=True)
 	parser.add_argument('--frac_dose', help='Tomo fractional dose',required=True, default=2)
 
 
@@ -141,13 +140,9 @@ if __name__=='__main__':
 			
 		print('   -->' + str(doubletId))
 		# This part need to be fixed
-		starFile = 'star/' + record[1]  + '.star'
-		docFile = 'doc/doc_total_' + record[0] + '.spi'
-		# Remove the comment in spider file
-		preprocess_bstar(starFile)
-		preprocess_spider_doc(docFile)
+		emanFile = 'star/' + record[1]  + '.star'
 		# Convert
-		df_relion = aa_to_relion(starFile.replace('.star', '.txt'), docFile, tomoName, tomoNo, binFactor, pixelSize, doubletId)
+		df_relion = eman3d_to_relion(emanFile, tomoName, tomoNo, binFactor, pixelSize)
 
 		if df_all is None:
 			df_all = df_relion.copy()
