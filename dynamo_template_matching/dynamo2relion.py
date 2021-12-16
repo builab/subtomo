@@ -80,7 +80,7 @@ if __name__=='__main__':
 	
 	tomoPath = df_tomolist.loc[idx, 'TomoPath'];
 	tomoNum = df_tomolist.loc[idx, 'TomoNo'];
-	tomoName = os.path.basename(tomoName)
+	tomoName = os.path.basename(tomoPath)
 	tomoName = tomoName.replace('_rec.mrc', '.mrc') 
 	df_all["TomoName"].replace({tomoNum:tomoName}, inplace=True)
 	
