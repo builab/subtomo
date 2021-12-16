@@ -70,10 +70,10 @@ if __name__=='__main__':
 	df_all['AnglePsi'] = eulers_relion[:,2]
 	df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
 	
-	print(df_all)
+	#print(df_all)
 	
 	# Loop through tomoName to replace with name
 	#for idx in df_all['TomoName']:
 		#print(idx)
 	
-	#write_star_4(df_all, args.ostar) 
+	write_star_4(df_all, args.ostar) 
