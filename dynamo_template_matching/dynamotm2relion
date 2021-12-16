@@ -52,7 +52,7 @@ if __name__=='__main__':
 	df_tomolist = pd.read_csv(args.tomodoc, delim_whitespace=True, names=tomodoc_header, index_col=False)
 	#print(df_tomolist)
 	
-	header_list = ["TomoName", "TomoParticleId", "TomoManifoldIndex", "CoordinateX", "CoordinateY", "CoordinateZ", "OriginXAngst", "OriginYAngst", "OriginZAngst", "AngleRot", "AngleTilt", "AnglePsi", "ClassNumber"]
+	header_list = ["TomoName", "TomoParticleId", "CoordinateX", "CoordinateY", "CoordinateZ", "AngleRot", "AngleTilt", "AnglePsi"]
 	df_all = pd.DataFrame(columns = header_list)
 	#print(df_all)
 		
@@ -67,12 +67,7 @@ if __name__=='__main__':
 	df_all['TomoName'] = tbl[:,19].astype(int)
 	df_all['CoordinateX'] = tbl[:,23].astype(int);
 	df_all['CoordinateY'] = tbl[:,24].astype(int);
-	df_all['CoordinateZ'] = tbl[:,25].astype(int);
-	df_all['OriginXAngst'] = tbl[:,3]*0;
-	df_all['OriginYAngst'] = tbl[:,4]*0;
-	df_all['OriginZAngst'] = tbl[:,5]*0;
-	df_all['ClassNumber'] = tbl[:,21].astype(int);
-	df_all['TomoManifoldIndex'] = tbl[:,21].astype(int) # Place holder, no use
+	df_all['CoordinateZ'] = tbl[:,25].astype(int);	
 	df_all['AngleRot'] = eulers_relion[:,0].astype(int) # Temporary convert
 	df_all['AngleTilt'] = eulers_relion[:,1].astype(int) # Temporary convert
 	df_all['AnglePsi'] = eulers_relion[:,2].astype(int) # Temporary convert
