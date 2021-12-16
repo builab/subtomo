@@ -97,12 +97,12 @@ if __name__=='__main__':
 		tsName = "tomograms/{:s}/{:s}.mrc".format(tomoName, tomoName)
 		ctfFile = "tomograms/{:s}/{:s}_output.txt".format(tomoName, tomoName)
 		imodDir = "tomograms/{:s}".format(tomoName)
-		orderList = "input\/order_list.csv"
+		orderList = "input/order_list.csv"
 		cullMrc = "tomograms/{:s}/{:s}_culled.mrc".format(tomoName, tomoName)	
 		row = [tomoName, tsName, ctfFile, imodDir, args.frac_dose, orderList, cullMrc]
 		df_length = len(df_descr)
 		df_descr.loc[df_length] = row
 		
-	print("Writing tomogram description tomograms_desc.star\n")
+	print("Writing tomogram description tomograms_descr.star\n")
 	write_star_4(df_descr, "", 'tomograms_descr.star')
 	
