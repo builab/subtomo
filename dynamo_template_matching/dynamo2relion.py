@@ -15,10 +15,10 @@ from eulerangles import matrix2euler
 from eulerangles import euler2euler
 from eulerangles import convert_eulers
 
-def write_star_4(dfin, outfile):
+def write_star_4(dfin, tag, outfile):
 	out = open(outfile, 'w')
 	out.write("# version 30001\n\n")
-	out.write("data_particles\n\n")
+	out.write("data_{:s}\n\n".format(tag))
 	out.write("loop_\n")
 	for i in range(len(dfin.columns)):
 		out.write('_rln{:s} #{:d}\n'.format(dfin.columns[i], i+1))
@@ -84,7 +84,7 @@ if __name__=='__main__':
 		tomoName = tomoName.replace('_rec.mrc', '') 
 		df_all["TomoName"].replace({tomoNum:tomoName}, inplace=True)
 	print("Writing coordinate file {:s}\n".format(args.ostar))
-	write_star_4(df_all, args.ostar)
+	write_star_4(df_all, "particles", args.ostar)
 	
 	# Making tomogram_desc.star	
 	descr_header = ["TomoName", "TomoTiltSeriesName", "TomoImportCtfFindFile", "TomoImportImodDir", "TomoImportFractionalDose", "TomoImportOrderList", "TomoImportCulledFile"]
@@ -99,8 +99,10 @@ if __name__=='__main__':
 		imodDir = "tomograms/{:s}".format(tomoName)
 		orderList = "input\/order_list.csv"
 		cullMrc = "tomograms/{:s}/{:s}_culled.mrc".format(tomoName, tomoName)	
-		df_descr.append([tomoName, tsName, ctfFile, imodDir, args.frac_dose, orderList, cullMrc]);
+		row = [tomoName, tsName, ctfFile, imodDir, args.frac_dose, orderList, cullMrc]
+		df_length = len(df_descr)
+		df_descr.loc[df_length] = row
 		
 	print("Writing tomogram description tomograms_desc.star\n")
-	write_star_4(df_descr, 'tomograms_descr.star')
+	write_star_4(df_descr, "", 'tomograms_descr.star')
 	
