@@ -46,11 +46,11 @@ if __name__=='__main__':
 	
 	tomodoc_header=["tomoNo", "tomoPath"]
 	df_tomolist = pd.read_csv(args.tomodoc, delim_whitespace=True, names=tomodoc_header, index_col=False)
-	print(df_tomolist)
+	#print(df_tomolist)
 	
 	header_list = ["TomoName", "TomoParticleId", "TomoManifoldIndex", "CoordinateX", "CoordinateY", "CoordinateZ", "OriginXAngst", "OriginYAngst", "OriginZAngst", "AngleRot", "AngleTilt", "AnglePsi", "ClassNumber"]
 	df_all = pd.DataFrame(columns = header_list)
-	print(df_all)
+	#print(df_all)
 		
 	# Renumber
 	tbl = np.genfromtxt(args.tbl, delimiter=' ')
