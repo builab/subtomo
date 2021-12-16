@@ -71,7 +71,7 @@ if __name__=='__main__':
 	df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
 	
 	# Loop through tomoName to replace with name
-	for idx in df_all['TomoName']:
-		print(idx)
+	#for idx in df_all['TomoName']:
+		#print(idx)
 	
-	write_star_4(df_all, 'coord_tomo.star') 
+	#write_star_4(df_all, args.ostar) 
