@@ -21,7 +21,7 @@ if __name__=='__main__':
   
 	binFactor = float(args.bin)
 	header_list = ["X", "Y", "Z"]
-	radius = int16(args.radius)
+	radius = int(args.radius)
 	
 	out = open(args.o, 'w')
 	df = pd.read_csv(args.i, delim_whitespace=True, names=header_list, index_col=False)
