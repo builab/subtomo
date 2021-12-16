@@ -26,12 +26,12 @@ if __name__=='__main__':
 	out = open(args.o, 'w')
 	df = pd.read_csv(args.i, delim_whitespace=True, names=header_list, index_col=False)
 	
-	out.write("<marker_set name="marker set 1">\n")
+	out.write("<marker_set name=\"marker set 1\">\n")
 	for i in range(len(df['X'])):
 		x = float(df[i, 'X'])*binFactor
 		y = float(df[i, 'Y'])*binFactor
 		z = float(df[i, 'Z'])*binFactor
-		out.write("<marker id="{:d}" x="{:.1f}" y="{:.1f}" z="{:.1f}"  radius="{:d}"/>\n".format(i + 1, x, y, z, radius))
+		out.write("<marker id=\"{:d}\" x=\"{:.1f}\" y=\"{:.1f}\" z=\"{:.1f}\" radius=\"{:d}\"/>\n".format(i + 1, x, y, z, radius))
 		
 	out.write("</marker_set>\n")
 	out.close()
