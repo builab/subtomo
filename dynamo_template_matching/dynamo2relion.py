@@ -2,6 +2,7 @@
 # Convert dynamo table to relion
 # Conversion based on the tomograms.doc, therefore, it will be a lot easier to organize than dynamo2relion from Pyle
 # https://pypi.org/project/dynamo2relion/
+#
 # Better use the starfile from Alister Burt in the future
 # Huy Bui, McGill 2021
 
@@ -81,5 +82,9 @@ if __name__=='__main__':
 		tomoName = os.path.basename(tomoPath)
 		tomoName = tomoName.replace('_rec.mrc', '') 
 		df_all["TomoName"].replace({tomoNum:tomoName}, inplace=True)
+	print("Writing coordinate file {:s}\n".format(args.ostar))
+	write_star_4(df_all, args.ostar)
 	
-	write_star_4(df_all, args.ostar) 
+	# Making tomogram_desc.star	
+
+	
