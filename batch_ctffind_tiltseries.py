@@ -48,8 +48,8 @@ if __name__=='__main__':
 	parser.add_argument('--tile', help='Tile',required=False, default='512')
 	parser.add_argument('--minres', help='Minimum resolution',required=False, default='30')
 	parser.add_argument('--maxres', help='Maximum resolution',required=False, default='5')
-	parser.add_argument('--dmin', help='Minimum defocus (Angstrom)',required=False,default='5000')
-	parser.add_argument('--dmax', help='Maximum defocus (Angstrom)',required=False,default='60000')
+	parser.add_argument('--dmin', help='Minimum defocus (Angstrom)',required=False,default='20000')
+	parser.add_argument('--dmax', help='Maximum defocus (Angstrom)',required=False,default='70000')
   
 	args = parser.parse_args()
 	
