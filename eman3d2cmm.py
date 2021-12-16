@@ -14,9 +14,23 @@ if __name__=='__main__':
 	parser.add_argument('--i', help='Input EMAN 3D coordinate',required=True)
 	parser.add_argument('--o', help='Output Chimera File',required=True)
 	parser.add_argument('--bin', help='Bin factor of EMAN Coordinate',required=True)
+	parser.add_argument('--radius', help='Radius of marker',required=False, default=5)
+
 
 	args = parser.parse_args()
   
-  binFactor = float(args.bin)
-  
-df = pd.read_csv(docFile, delim_whitespace=True, names=header_list)
+	binFactor = float(args.bin)
+	header_list = ["X", "Y", "Z"]
+	radius = int16(args.radius)
+	
+	out = open(args.o, 'w')
+	df = pd.read_csv(args.i, delim_whitespace=True, names=header_list, index_col=False)
+	
+	out.write("<marker_set name="marker set 1">\n")
+	for i in range(len(df['X'])):
+		out.write("<marker id="{:d}" x="{:.1f}" y="{:.1f}" z="{:.1f}"  radius="{:d}"/>\n".format(i + 1, df[i, 'X']*binFactor, df[i, 'Y']*binFactor, df[i, 'Z']*binFactor, radius))
+		
+	out.write("</marker_set>\n")
+	out.close()
+	
+	
