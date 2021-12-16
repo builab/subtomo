@@ -44,7 +44,7 @@ if __name__=='__main__':
 	pixelSize = float(args.angpix)
 	binFactor = float(args.bin)
 	
-	tomodoc_header=["tomoNo", "tomoPath"]
+	tomodoc_header=["TomoNo", "TomoPath"]
 	df_tomolist = pd.read_csv(args.tomodoc, delim_whitespace=True, names=tomodoc_header, index_col=False)
 	#print(df_tomolist)
 	
@@ -59,7 +59,7 @@ if __name__=='__main__':
 	
 	eulers_dynamo = tbl[:,6:9]
 	eulers_relion = convert_eulers(eulers_dynamo, source_meta='dynamo', target_meta='warp')
-	df_all['TomoName'] = tbl[:, 19];
+	df_all['TomoName'] = int16(tbl[:, 19]);
 	df_all['CoordinateX'] = tbl[:,23]*binFactor;
 	df_all['CoordinateY'] = tbl[:,24]*binFactor;
 	df_all['CoordinateZ'] = tbl[:,25]*binFactor;
@@ -76,7 +76,13 @@ if __name__=='__main__':
 	#print(df_all)
 	
 	# Loop through tomoName to replace with name
-	#for idx in df_all['TomoName']:
-		#print(idx)
+	for idx in len(df_tomolist):
+		print(idx)
+	
+	tomoPath = df_tomolist.loc[idx, 'TomoPath'];
+	tomoNum = df_tomolist.loc[idx, 'TomoNo'];
+	tomoName = os.path.basename(tomoName)
+	tomoName = tomoName.replace('_rec.mrc', '.mrc') 
+	df_all["TomoName"].replace({tomoNum:tomoName}, inplace=True)
 	
 	write_star_4(df_all, args.ostar) 
