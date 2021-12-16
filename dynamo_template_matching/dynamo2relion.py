@@ -4,6 +4,7 @@
 # https://pypi.org/project/dynamo2relion/
 #
 # Better use the starfile from Alister Burt in the future
+# Output also the tomograms_descr.star
 # Huy Bui, McGill 2021
 
 import numpy as np
