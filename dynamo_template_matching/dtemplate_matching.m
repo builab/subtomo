@@ -26,6 +26,9 @@ local_cluster = parcluster('local');
 local_cluster.JobStorageLocation = '/tmp';
 local_cluster.NumWorkers = NumWorkers;
 
+% make output dir
+mkdir(outDir)
+
 
 for i = 1:nTomo
 	tomo = listTomo{i};
