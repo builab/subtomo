@@ -189,7 +189,7 @@ if __name__=='__main__':
 			shutil.move(baseName + '.mrc', baseName + '_orig.mrc')
 			print('mv ' + baseName + '_fixed.mrc ' + baseName + '.mrc')
 			shutil.move(baseName + '_fixed.mrc', baseName + '.mrc')
-		if operation == 'newst':
+		elif operation == 'newst':
 			run_newst(baseName, tempCont)
 			os.system('submfg newst.com')
 		elif operation == 'tilt':
