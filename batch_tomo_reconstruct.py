@@ -14,6 +14,21 @@ This is used specifically for K3 in McGill. Imod 4.11.8
 import argparse, os, glob, shutil
 from multiprocessing import Pool
 
+def run_eraser(baseName, tempCont):
+	''' Write eraser and run'''
+	outCom = open(operation + '.com', 'w')
+	for line in tempCont:
+		if line.startswith('InputFile'):
+			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
+		elif line.startswith('OutputFile'):
+			outCom.write('OutputFile\t{:s}_fixed.mrc\n'.format(baseName))
+		elif line.startswith('PointModel'):
+			outCom.write('PointModel\t{:s}_peak.mod\n'.format(baseName))
+		#elif line.startswith('BinByFactor'):
+		#	outCom.write('BinByFactor\t{:d}.xf\n'.format(binFactor)
+		else:
+			outCom.write(line)
+	outCom.close()
 
 def run_newst(baseName, tempCont):
 	'''Write newst and run'''
@@ -168,6 +183,12 @@ if __name__=='__main__':
 		print('---> Processing ' + tiltseries + ' ...')
 		print('Change dir to ' + tsPath)
 		os.chdir(tsPath)
+		if operation == 'eraser':
+			run_ccderaser(baseName, tempCont)
+			os.system('submfg eraser.com')
+			shutil.move(baseName + '.mrc', baseName + '_orig.mrc')
+			print('mv ' + baseName + '_fixed.mrc ' + baseName + '.mrc')
+			shutil.move(baseName + '_fixed.mrc', baseName + '.mrc')
 		if operation == 'newst':
 			run_newst(baseName, tempCont)
 			os.system('submfg newst.com')
