@@ -184,7 +184,7 @@ if __name__=='__main__':
 		print('Change dir to ' + tsPath)
 		os.chdir(tsPath)
 		if operation == 'eraser':
-			run_ccderaser(baseName, tempCont)
+			run_eraser(baseName, tempCont)
 			os.system('submfg eraser.com')
 			shutil.move(baseName + '.mrc', baseName + '_orig.mrc')
 			print('mv ' + baseName + '_fixed.mrc ' + baseName + '.mrc')
