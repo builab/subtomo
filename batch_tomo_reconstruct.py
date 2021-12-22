@@ -39,7 +39,7 @@ def run_prenewst(baseName, tempCont):
 		if line.startswith('InputFile'):
 			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
 		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_ali.mrc\n'.format(baseName))
+			outCom.write('OutputFile\t{:s}_preali.mrc\n'.format(baseName))
 		elif line.startswith('TransformFile'):
 			outCom.write('TransformFile\t{:s}.prexg\n'.format(baseName))	
 		elif line.endswith('.prexf\n'):
