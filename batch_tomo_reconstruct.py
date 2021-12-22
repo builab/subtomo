@@ -31,6 +31,24 @@ def run_eraser(baseName, tempCont):
 		else:
 			outCom.write(line)
 	outCom.close()
+	
+def run_prenewst(baseName, tempCont):
+	'''Write prenewst and run'''
+	outCom = open(operation + '.com', 'w')
+	for line in tempCont:
+		if line.startswith('InputFile'):
+			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
+		elif line.startswith('OutputFile'):
+			outCom.write('OutputFile\t{:s}_ali.mrc\n'.format(baseName))
+		elif line.startswith('TransformFile'):
+			outCom.write('TransformFile\t{:s}.prexg\n'.format(baseName))	
+		elif line.endswith('.prexf\n'):
+			outCom.write('{:s}.prexg\n'.format(baseName))	
+		elif line.endswith('.prexf\n'):
+			outCom.write('{:s}.prexf\n'.format(baseName))	
+		else:
+			outCom.write(line)
+	outCom.close()
 
 def run_newst(baseName, tempCont):
 	'''Write newst and run'''
@@ -41,10 +59,7 @@ def run_newst(baseName, tempCont):
 		elif line.startswith('OutputFile'):
 			outCom.write('OutputFile\t{:s}_ali.mrc\n'.format(baseName))
 		elif line.startswith('TransformFile'):
-			if operation == 'newst':
-				outCom.write('TransformFile\t{:s}.xf\n'.format(baseName))
-			elif operation == 'prenewst':
-				outCom.write('TransformFile\t{:s}.prexg\n'.format(baseName))			
+			outCom.write('TransformFile\t{:s}.xf\n'.format(baseName))
 		else:
 			outCom.write(line)
 	outCom.close()
@@ -229,7 +244,7 @@ if __name__=='__main__':
 			print('mv ' + baseName + '_fixed.mrc ' + baseName + '.mrc')
 			shutil.move(baseName + '_fixed.mrc', baseName + '.mrc')
 		elif operation == 'prenewst':
-			run_newst(baseName, tempCont)
+			run_prenewst(baseName, tempCont)
 			os.system('submfg prenewst.com')
 		elif operation == 'align':
 			run_align(baseName, tempCont)
