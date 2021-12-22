@@ -231,6 +231,9 @@ if __name__=='__main__':
 		elif operation == 'prenewst':
 			run_newst(baseName, tempCont)
 			os.system('submfg prenewst.com')
+		elif operation == 'align':
+			run_align(baseName, tempCont)
+			os.system('submfg align.com')
 		elif operation == 'newst':
 			run_newst(baseName, tempCont)
 			os.system('submfg newst.com')
