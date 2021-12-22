@@ -14,6 +14,22 @@ This is used specifically for K3 in McGill. Imod 4.11.8
 import argparse, os, glob, shutil
 from multiprocessing import Pool
 
+def run_prenewst(baseName, tempCont):
+	'''Write prenewst and run'''
+	outCom = open(operation + '.com', 'w')
+	for line in tempCont:
+		if line.startswith('InputFile'):
+			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
+		elif line.startswith('OutputFile'):
+			outCom.write('OutputFile\t{:s}_ali.mrc\n'.format(baseName))
+		elif line.startswith('TransformFile'):
+			outCom.write('TransformFile\t{:s}.prexg\n'.format(baseName))
+		#elif line.startswith('BinByFactor'):
+		#	outCom.write('BinByFactor\t{:d}.xf\n'.format(binFactor)
+		else:
+			outCom.write(line)
+	outCom.close()
+	
 def run_eraser(baseName, tempCont):
 	''' Write eraser and run'''
 	outCom = open(operation + '.com', 'w')
@@ -189,6 +205,9 @@ if __name__=='__main__':
 			shutil.move(baseName + '.mrc', baseName + '_orig.mrc')
 			print('mv ' + baseName + '_fixed.mrc ' + baseName + '.mrc')
 			shutil.move(baseName + '_fixed.mrc', baseName + '.mrc')
+		elif operation == 'prenewst':
+			run_prenewst(baseName, tempCont)
+			os.system('submfg prenewst.com')
 		elif operation == 'newst':
 			run_newst(baseName, tempCont)
 			os.system('submfg newst.com')
