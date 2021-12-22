@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Dec 8 2021
-Script to run batch imod through the command line
-For now, use a default template only and no tilt sirt
+Script to run batch imod through the command line using a template from one reconstructed tomogram
+TODO: NO TILT SIRT (not really important)
 TODO: implement multiprocessing for cluster submission
 
 This is used specifically for K3 in McGill. Imod 4.11.8
@@ -14,21 +14,7 @@ This is used specifically for K3 in McGill. Imod 4.11.8
 import argparse, os, glob, shutil
 from multiprocessing import Pool
 
-def run_prenewst(baseName, tempCont):
-	'''Write prenewst and run'''
-	outCom = open(operation + '.com', 'w')
-	for line in tempCont:
-		if line.startswith('InputFile'):
-			outCom.write('InputFile\t{:s}.mrc\n'.format(baseName))
-		elif line.startswith('OutputFile'):
-			outCom.write('OutputFile\t{:s}_ali.mrc\n'.format(baseName))
-		elif line.startswith('TransformFile'):
-			outCom.write('TransformFile\t{:s}.prexg\n'.format(baseName))
-		#elif line.startswith('BinByFactor'):
-		#	outCom.write('BinByFactor\t{:d}.xf\n'.format(binFactor)
-		else:
-			outCom.write(line)
-	outCom.close()
+
 	
 def run_eraser(baseName, tempCont):
 	''' Write eraser and run'''
@@ -55,13 +41,50 @@ def run_newst(baseName, tempCont):
 		elif line.startswith('OutputFile'):
 			outCom.write('OutputFile\t{:s}_ali.mrc\n'.format(baseName))
 		elif line.startswith('TransformFile'):
-			outCom.write('TransformFile\t{:s}.xf\n'.format(baseName))
-		#elif line.startswith('BinByFactor'):
-		#	outCom.write('BinByFactor\t{:d}.xf\n'.format(binFactor)
+			if operation == 'newst':
+				outCom.write('TransformFile\t{:s}.xf\n'.format(baseName))
+			elif operation == 'prenewst':
+				outCom.write('TransformFile\t{:s}.prexg\n'.format(baseName))			
 		else:
 			outCom.write(line)
 	outCom.close()
-				     
+		
+def run_align(baseName, tempCont):
+	'''Write align and run'''
+	outCom = open(operation + '.com', 'w')
+	for line in tempCont:
+		if line.startswith('ModelFile'):
+			outCom.write('ModelFile\t{:s}.fid\n'.format(baseName))
+		elif line.startswith('ImageFile'):
+			outCom.write('ImageFile\t{:s}_preali.mrc\n'.format(baseName))
+		elif line.startswith('OutputModelFile'):
+			outCom.write('OutputModelFile\t{:s}.3dmod\n'.format(baseName))
+		elif line.startswith('OutputFidXYZFile'):
+			outCom.write('OutputFidXYZFile\t{:s}fid.xyz\n'.format(baseName))
+		elif line.startswith('OutputTiltFile'):
+			outCom.write('OutputTiltFile\t{:s}.tlt\n'.format(baseName))
+		elif line.startswith('OutputXAxisTiltFile'):
+			outCom.write('OutputXAxisTiltFile\t{:s}.xtilt\n'.format(baseName))
+		elif line.startswith('OutputTransformFile'):
+			outCom.write('OutputTransformFile\t{:s}.tltxf\n'.format(baseName))
+		elif line.startswith('OutputFilledInModel'):
+			outCom.write('OutputFilledInModel\t{:s}_nogap.fid\n'.format(baseName))
+		elif line.startswith('TiltFile'):
+			outCom.write('TiltFile\t{:s}.rawtlt\n'.format(baseName))
+		elif line.startswith('InputFile1'):
+			outCom.write('InputFile1\t{:s}.prexg\n'.format(baseName))
+		elif line.startswith('InputFile2'):
+			outCom.write('InputFile2\t{:s}.tltxf\n'.format(baseName))
+		elif line.startswith('OutputFile'):
+			outCom.write('OutputFile\t{:s}_fid.xf\n'.format(baseName))
+		elif line.startswith('$b3dcopy -p'):
+			outCom.write('$b3dcopy -p {:s}_fid.xf {:s}.xf\n'.format(baseName, baseName))	
+			outCom.write('$b3dcopy -p {:s}.tlt {:s}_fid.tlt\n'.format(baseName, baseName))			
+		elif 'patch2imod' in line:
+			outCom.write('$if (-e {:s}.resid) patch2imod -s 10 {:s}.resid {:s}.resmod\n'.format(baseName, baseName, baseName))
+		else:
+			outCom.write(line)
+	outCom.close()
 				     
 def run_tilt(baseName, tempCont):
 	outCom = open('tilt.com', 'w')	
@@ -206,7 +229,7 @@ if __name__=='__main__':
 			print('mv ' + baseName + '_fixed.mrc ' + baseName + '.mrc')
 			shutil.move(baseName + '_fixed.mrc', baseName + '.mrc')
 		elif operation == 'prenewst':
-			run_prenewst(baseName, tempCont)
+			run_newst(baseName, tempCont)
 			os.system('submfg prenewst.com')
 		elif operation == 'newst':
 			run_newst(baseName, tempCont)
