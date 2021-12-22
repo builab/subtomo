@@ -74,6 +74,8 @@ def run_align(baseName, tempCont):
 			outCom.write('ImageFile\t{:s}_preali.mrc\n'.format(baseName))
 		elif line.startswith('OutputModelFile'):
 			outCom.write('OutputModelFile\t{:s}.3dmod\n'.format(baseName))
+		elif line.startswith('OutputResidualFile'):
+			outCom.write('OutputResidualFile\t{:s}.resid\n'.format(baseName))
 		elif line.startswith('OutputFidXYZFile'):
 			outCom.write('OutputFidXYZFile\t{:s}fid.xyz\n'.format(baseName))
 		elif line.startswith('OutputTiltFile'):
