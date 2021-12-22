@@ -43,9 +43,9 @@ def run_prenewst(baseName, tempCont):
 		elif line.startswith('TransformFile'):
 			outCom.write('TransformFile\t{:s}.prexg\n'.format(baseName))	
 		elif line.endswith('.prexf\n'):
-			outCom.write('{:s}.prexg\n'.format(baseName))	
-		elif line.endswith('.prexf\n'):
 			outCom.write('{:s}.prexf\n'.format(baseName))	
+		elif line.endswith('.prexg\n'):
+			outCom.write('{:s}.prexg\n'.format(baseName))	
 		else:
 			outCom.write(line)
 	outCom.close()
