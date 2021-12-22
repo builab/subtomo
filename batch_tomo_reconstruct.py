@@ -218,7 +218,7 @@ if __name__=='__main__':
 	#parser.add_argument('--xsize', help='X size of image',required=True)	
 	#parser.add_argument('--ysize', help='Y size of image',required=True)			     
 	
-	print('Only tested with IMOD 4.9 and 4.11.8 only')
+	print('Only tested with 4.11 only')
 	
 	args = parser.parse_args()
 	     	
