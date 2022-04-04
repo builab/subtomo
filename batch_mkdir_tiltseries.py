@@ -3,7 +3,7 @@
 """
 Created on Sat Dec  8, 2021
 
-All .mrc & mrc.mdoc file should be in 1 folder
+All .mrc & mrc.mdoc, log file should be in 1 folder
 Move .mrc file into folders
 
 @author: Huy Bui, McGill
@@ -22,6 +22,8 @@ if __name__=='__main__':
 			break
 		tsName = tiltseries.replace('.mrc', '')
 		mrcDoc = tiltseries.replace('.mrc', '.mrc.mdoc')
+		log = tiltseries.replace('.mrc', '.log')
+
 		try:
 			os.mkdir(tsName)
 		except OSError as exc:
@@ -33,6 +35,8 @@ if __name__=='__main__':
 		shutil.move(tiltseries, os.path.join(tsName, tiltseries))
 		print('mv ' + mrcDoc + ' ' + os.path.join(tsName, mrcDoc))
 		shutil.move(mrcDoc, os.path.join(tsName, mrcDoc))
+		print('mv ' + log + ' ' + os.path.join(tsName, mrcDoc))
+		shutil.move(log, os.path.join(tsName, log))
 
 
 
