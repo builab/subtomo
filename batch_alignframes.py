@@ -14,7 +14,7 @@ Edit other parameter inside the files
 import argparse, os, glob
 
 
-def run_alignframes(tiltseries, mdoc, rotation, frameDir, rotation, gainref, vary):
+def run_alignframes(tiltseries, mdoc, frameDir, rotation, gainref, vary):
 	"""Run alignframes"""
 	cmd = 'alignframes -mdoc ' + mdoc + ' -path ' + frameDir + ' -rotation ' + rotation + ' -vary ' + vary + ' -gain ' + gainref + ' -normalize ' + tiltseries
 	os.system(cmd) 
@@ -43,5 +43,5 @@ if __name__=='__main__':
 		tsPath = os.path.dirname(tiltseries)
 		mdoc = tiltseries.replace('.mrc', '.mrc.mdoc')
 		print('Processing ' + tsName)
-		run_alignframes(tiltseries, mdoc, rotation, args.frameDir, args.rotation, args.gainref, args.vary)
+		run_alignframes(tiltseries, mdoc, args.frameDir, args.rotation, args.gainref, args.vary)
 
