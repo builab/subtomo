@@ -27,7 +27,7 @@ if __name__=='__main__':
 	parser.add_argument('--frameDir', help='Directory containing frames',required=True)
 	parser.add_argument('--rotation', help='Rotation value (default 6 for McGill Krios K3)',required=False,default="6")
 	parser.add_argument('--gainref', help='Gain reference file',required=True)
-	parser.add_argument('--vary', help='Vary value of alignframe',required=False, default="0.1"")
+	parser.add_argument('--vary', help='Vary value of alignframe',required=False, default="0.1")
 
   
 	args = parser.parse_args()
