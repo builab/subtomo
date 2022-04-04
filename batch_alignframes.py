@@ -14,9 +14,9 @@ Edit other parameter inside the files
 import argparse, os, glob
 
 
-def run_alignframes(tiltseries, mdoc, frameDir, rotation, gainref, vary):
+def run_alignframes(tiltseries, mdoc, frameDir, rotation, gainref, vary, gpu):
 	"""Run alignframes"""
-	cmd = 'alignframes -mdoc ' + mdoc + ' -path ' + frameDir + ' -rotation ' + rotation + ' -vary ' + vary + ' -gain ' + gainref + ' -normalize ' + tiltseries
+	cmd = 'alignframes -mdoc ' + mdoc + ' -path ' + frameDir + ' -rotation ' + rotation + ' -vary ' + vary + ' -gain ' + gainref + ' -gpu ' + str(gpu) + ' -normalize ' + tiltseries
 	print(cmd)
 	os.system(cmd) 
 
@@ -27,6 +27,7 @@ if __name__=='__main__':
 	parser.add_argument('--frameDir', help='Directory containing frames',required=True)
 	parser.add_argument('--rotation', help='Rotation value (default 6 for McGill Krios K3)',required=False,default="6")
 	parser.add_argument('--gainref', help='Gain reference file',required=True)
+	parser.add_argument('--gpu', help='Use GPU',required=False,default=0)
 	parser.add_argument('--vary', help='Vary value of alignframe',required=False, default="0.1")
 
   
@@ -44,5 +45,5 @@ if __name__=='__main__':
 		tsPath = os.path.dirname(tiltseries)
 		mdoc = tiltseries.replace('.mrc', '.mrc.mdoc')
 		print('Processing ' + tsName)
-		run_alignframes(tiltseries, mdoc, args.frameDir, args.rotation, args.gainref, args.vary)
+		run_alignframes(tiltseries, mdoc, args.frameDir, args.rotation, args.gainref, args.vary, args.gpu)
 
