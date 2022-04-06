@@ -3,9 +3,11 @@
 """
 Created on Dec 8 2021
 Script to run batch imod through the command line using a template from one reconstructed tomogram
+v0.7 April 2021 Use exclude views from align.com
 TODO: NO TILT SIRT (not really important)
 TODO: implement multiprocessing for cluster submission
 NOT WORKING YET
+
 is is used specifically for K3 in McGill. Imod 4.11.8
 
 @author: Huy Bui, McGill
@@ -64,7 +66,7 @@ def run_newst(baseName, tempCont):
 			outCom.write(line)
 	outCom.close()
 		
-def run_align(baseName, tempCont):
+def run_align(baseName, tempCont, excludeList):
 	'''Write align and run'''
 	outCom = open(operation + '.com', 'w')
 	for line in tempCont:
@@ -94,6 +96,8 @@ def run_align(baseName, tempCont):
 			outCom.write('InputFile2\t{:s}.tltxf\n'.format(baseName))
 		elif line.startswith('OutputFile'):
 			outCom.write('OutputFile\t{:s}_fid.xf\n'.format(baseName))
+			if excludeList != "":
+				outCom.write('ExcludeList\t{:s}\nn'.format(excludeList))
 		elif line.startswith('$b3dcopy -p'):
 			outCom.write('$b3dcopy -p {:s}_fid.xf {:s}.xf\n'.format(baseName, baseName))	
 			outCom.write('$b3dcopy -p {:s}.tlt {:s}_fid.tlt\n'.format(baseName, baseName))			
@@ -105,6 +109,7 @@ def run_align(baseName, tempCont):
 				     
 def run_tilt(baseName, tempCont):
 	outCom = open('tilt.com', 'w')	
+	
 				     
 	for line in tempCont:
 		if line.startswith('InputProjections'):
@@ -113,6 +118,8 @@ def run_tilt(baseName, tempCont):
 			outCom.write('OutputFile\t{:s}_full_rec.mrc\n'.format(baseName))
 		elif line.startswith('TILTFILE'):
 			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName))
+			if excludeList != "":
+				outCom.write('ExcludeList\t{:s}\nn'.format(excludeList))
 		#elif line.startswith('THICKNESS'):
 		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
@@ -153,6 +160,8 @@ def run_tilt_3dfind(baseName, tempCont):
 		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
 			outCom.write('XTILTFILE\t{:s}.xtilt\n'.format(baseName))
+			if excludeList != "":
+				outCom.write('ExcludeList\t{:s}\nn'.format(excludeList))
 		else:
 			outCom.write(line)
 	outCom.close()		     
@@ -214,6 +223,8 @@ if __name__=='__main__':
 	#parser.add_argument('--bin', help='Bin factor',required=True)			     
 	parser.add_argument('--template', help='Template file from 1 reconstruction',required=True)
 	parser.add_argument('--noproc', help='Number of processors',required=False, default=1)
+	parser.add_argument('--excludeList', help='ExcludeList',required=False, default="")
+
 
 	#parser.add_argument('--xsize', help='X size of image',required=True)	
 	#parser.add_argument('--ysize', help='Y size of image',required=True)			     
@@ -253,13 +264,13 @@ if __name__=='__main__':
 			run_prenewst(baseName, tempCont)
 			os.system('submfg prenewst.com')
 		elif operation == 'align':
-			run_align(baseName, tempCont)
+			run_align(baseName, tempCont, excludeList)
 			os.system('submfg align.com')
 		elif operation == 'newst':
 			run_newst(baseName, tempCont)
 			os.system('submfg newst.com')
 		elif operation == 'tilt':
-			run_tilt(baseName, tempCont)
+			run_tilt(baseName, tempCont, excludeList)
 			os.system('submfg tilt.com')
 		elif operation == 'newst_3dfind':
 			run_newst_3dfind(baseName, tempCont)
