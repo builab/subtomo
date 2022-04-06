@@ -146,7 +146,7 @@ def run_newst_3dfind(baseName, tempCont):
 			outCom.write(line)
 	outCom.close()	
 				     
-def run_tilt_3dfind(baseName, tempCont):
+def run_tilt_3dfind(baseName, tempCont, excludeList):
 	outCom = open('tilt_3dfind.com', 'w')	
 				     
 	for line in tempCont:
@@ -237,6 +237,7 @@ if __name__=='__main__':
 	tempCont = tempfile.readlines()
 	operation = args.operation
 	
+	
 	currentDir = os.getcwd()
 	
 	# Parallel
@@ -264,19 +265,19 @@ if __name__=='__main__':
 			run_prenewst(baseName, tempCont)
 			os.system('submfg prenewst.com')
 		elif operation == 'align':
-			run_align(baseName, tempCont, excludeList)
+			run_align(baseName, tempCont, args.excludeList)
 			os.system('submfg align.com')
 		elif operation == 'newst':
 			run_newst(baseName, tempCont)
 			os.system('submfg newst.com')
 		elif operation == 'tilt':
-			run_tilt(baseName, tempCont, excludeList)
+			run_tilt(baseName, tempCont, args.excludeList)
 			os.system('submfg tilt.com')
 		elif operation == 'newst_3dfind':
 			run_newst_3dfind(baseName, tempCont)
 			os.system('submfg newst_3dfind.com')
 		elif operation == 'tilt_3dfind':
-			run_tilt_3dfind(baseName, tempCont)
+			run_tilt_3dfind(baseName, tempCont, args.excludeList)
 			os.system('submfg tilt_3dfind.com')
 		elif operation == 'findbeads3d':
 			run_findbeads3d(baseName, tempCont)
