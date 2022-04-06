@@ -90,14 +90,14 @@ def run_align(baseName, tempCont, excludeList):
 			outCom.write('OutputFilledInModel\t{:s}_nogap.fid\n'.format(baseName))
 		elif line.startswith('TiltFile'):
 			outCom.write('TiltFile\t{:s}.rawtlt\n'.format(baseName))
+			if excludeList != "":
+				outCom.write('ExcludeList\t{:s}\nn'.format(excludeList))
 		elif line.startswith('InputFile1'):
 			outCom.write('InputFile1\t{:s}.prexg\n'.format(baseName))
 		elif line.startswith('InputFile2'):
 			outCom.write('InputFile2\t{:s}.tltxf\n'.format(baseName))
 		elif line.startswith('OutputFile'):
 			outCom.write('OutputFile\t{:s}_fid.xf\n'.format(baseName))
-			if excludeList != "":
-				outCom.write('ExcludeList\t{:s}\nn'.format(excludeList))
 		elif line.startswith('$b3dcopy -p'):
 			outCom.write('$b3dcopy -p {:s}_fid.xf {:s}.xf\n'.format(baseName, baseName))	
 			outCom.write('$b3dcopy -p {:s}.tlt {:s}_fid.tlt\n'.format(baseName, baseName))			
