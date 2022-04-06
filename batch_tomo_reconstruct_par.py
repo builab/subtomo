@@ -3,7 +3,7 @@
 """
 Created on Dec 8 2021
 Script to run batch imod through the command line using a template from one reconstructed tomogram
-v0.7 April 2021 Use exclude views from align.com
+v0.7 April 2021 Use exclude views from align.com and tilt.com
 TODO: NO TILT SIRT (not really important)
 TODO: implement multiprocessing for cluster submission
 NOT WORKING YET
@@ -107,7 +107,7 @@ def run_align(baseName, tempCont, excludeList):
 			outCom.write(line)
 	outCom.close()
 				     
-def run_tilt(baseName, tempCont):
+def run_tilt(baseName, tempCont, excludeList):
 	outCom = open('tilt.com', 'w')	
 	
 				     
@@ -119,7 +119,7 @@ def run_tilt(baseName, tempCont):
 		elif line.startswith('TILTFILE'):
 			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName))
 			if excludeList != "":
-				outCom.write('ExcludeList\t{:s}\nn'.format(excludeList))
+				outCom.write('EXCLUDELIST\t{:s}\n'.format(excludeList))
 		#elif line.startswith('THICKNESS'):
 		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
