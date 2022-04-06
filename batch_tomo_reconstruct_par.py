@@ -91,7 +91,7 @@ def run_align(baseName, tempCont, excludeList):
 		elif line.startswith('TiltFile'):
 			outCom.write('TiltFile\t{:s}.rawtlt\n'.format(baseName))
 			if excludeList != "":
-				outCom.write('ExcludeList\t{:s}\nn'.format(excludeList))
+				outCom.write('ExcludeList\t{:s}\n'.format(excludeList))
 		elif line.startswith('InputFile1'):
 			outCom.write('InputFile1\t{:s}.prexg\n'.format(baseName))
 		elif line.startswith('InputFile2'):
@@ -156,12 +156,12 @@ def run_tilt_3dfind(baseName, tempCont, excludeList):
 			outCom.write('OutputFile\t{:s}_3dfind_rec.mrc\n'.format(baseName))
 		elif line.startswith('TILTFILE'):
 			outCom.write('TILTFILE\t{:s}.tlt\n'.format(baseName))
+			if excludeList != "":
+				outCom.write('ExcludeList\t{:s}\n'.format(excludeList))
 		#elif line.startswith('THICKNESS'):
 		#	outCom.write('THICKNESS\t{:s}\n'.format(thickness)
 		elif line.startswith('XTILTFILE'):
 			outCom.write('XTILTFILE\t{:s}.xtilt\n'.format(baseName))
-			if excludeList != "":
-				outCom.write('ExcludeList\t{:s}\nn'.format(excludeList))
 		else:
 			outCom.write(line)
 	outCom.close()		     
