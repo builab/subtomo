@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Script to convert eman3d file to cmm for quick checking
+Also, option for separate color
 TODO: Better to use ElementTree
 HB, McGill, 2021
 """
