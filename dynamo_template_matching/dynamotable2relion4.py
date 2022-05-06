@@ -9,7 +9,7 @@
 # Output also the tomograms_descr.star
 # Huy Bui, McGill 2021
 
-#import numpy as np
+import numpy as np
 import pandas as pd
 import argparse, os
 import starfile
