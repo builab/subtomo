@@ -30,7 +30,7 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 	for axis in ('x', 'y', 'z'):
 		heading = f'rlnCoordinate{axis.upper()}'
 		shift_axis = f'd{axis}'
-		data[heading] = table[axis] + table[shift_axis]
+		data[heading] = (table[axis] + table[shift_axis])*binFactor
 
 	#data['TomoParticleId'] = np.arange(len(data), dtype=np.int16) + 1
 	print(data['rlnCoordinateY'])
