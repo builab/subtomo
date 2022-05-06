@@ -5,9 +5,7 @@
 # Conversion based on the tomograms.doc, therefore, it will be a lot easier to organize than dynamo2relion from Pyle
 # https://pypi.org/project/dynamo2relion/
 #
-# Better use the starfile from Alister Burt in the future
-# Output also the tomograms_descr.star
-# Huy Bui, McGill 2021
+# Huy Bui, McGill 2022
 
 import numpy as np
 import pandas as pd
@@ -33,7 +31,6 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 		data[heading] = (table[axis] + table[shift_axis])*binFactor
 
 	data['rlnTomoParticleId'] = np.arange(len(data['rlnCoordinateX']), dtype=np.int16) + 1
-	#print(data['TomoParticleId'])
 
 	# extract and convert eulerangles
 	eulers_dynamo = table[['tdrot', 'tilt', 'narot']].to_numpy()
@@ -43,7 +40,7 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 	data['rlnAnglePsi'] = eulers_warp[:, 2]
 
 	
-	# extract and sanitise micrograph names to ensure compatibility with M
+	# extract and sanitise micrograph names to ensure compatibility with Relion 4.0
 	data['rlnTomoName'] = table['tomo_file'].apply(sanitise_imod_tomo_name)
 
 	# convert dict to dataframe
@@ -94,6 +91,7 @@ if __name__=='__main__':
 
 	
 	# Making tomogram_desc.star	
+	# This can be improved similar to the code from Alister Burt before
 	descr_header = ["TomoName", "TomoTiltSeriesName", "TomoImportCtfFindFile", "TomoImportImodDir", "TomoImportFractionalDose", "TomoImportOrderList", "TomoImportCulledFile"]
 	df_descr = pd.DataFrame(columns =descr_header)
 	for idx in range(len(df_tomolist)):	
@@ -110,8 +108,6 @@ if __name__=='__main__':
 		df_length = len(df_descr)
 		df_descr.loc[df_length] = row
 		
-	#print("Writing tomogram description tomograms_descr.star\n")
-	#write_star_4(df_descr, "", 'tomograms_descr.star')
 	starfile.write(df_descr, args.ostar.replace(".star", "_tomo_descr.star"), overwrite=True)
 	print("Done! Write " + args.ostar.replace(".star", "_tomo_descr.star"))
 	
