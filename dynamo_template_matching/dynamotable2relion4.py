@@ -33,7 +33,7 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 		data[heading] = table[axis] + table[shift_axis]
 
 	#data['TomoParticleId'] = np.arange(len(data), dtype=np.int16) + 1
-	print(length(data['rlnCoordinateX']))
+	print(data['rlnCoordinateY']))
 
 	# extract and convert eulerangles
 	eulers_dynamo = table[['tdrot', 'tilt', 'narot']].to_numpy()
@@ -46,7 +46,7 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 	# extract and sanitise micrograph names to ensure compatibility with M
 	data['rlnTomoName'] = table['tomo_file'].apply(sanitise_imod_tomo_name)
 
-	print(data)
+	#print(data)
 	# convert dict to dataframe
 	df = pd.DataFrame.from_dict(data)
 
