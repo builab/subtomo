@@ -20,56 +20,54 @@ from eulerangles import convert_eulers
 
 def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFactor):
  	# Modify now with angpix to make sure it is specified correctly
-    # Read table file into dataframe
-    table = dynamotable.read(input_table_file, table_map_file)
+	# Read table file into dataframe
+	table = dynamotable.read(input_table_file, table_map_file)
 
-    # Prep data for star file in dict
-    data = {}
+	# Prep data for star file in dict
+	data = {}
 
-    # extract xyz into dict with relion style headings
-    for axis in ('x', 'y', 'z'):
-        heading = f'rlnCoordinate{axis.upper()}'
-        shift_axis = f'd{axis}'
-        data[heading] = (table[axis] + table[shift_axis])*binFactor
+	# extract xyz into dict with relion style headings
+	for axis in ('x', 'y', 'z'):
+		heading = f'rlnCoordinate{axis.upper()}'
+		shift_axis = f'd{axis}'
+		data[heading] = (table[axis] + table[shift_axis])*binFactor
 
-    data['TomoParticleId'] = np.arange(len(data), dtype=np.int16) + 1
+	data['TomoParticleId'] = np.arange(len(data), dtype=np.int16) + 1
 
-    # extract and convert eulerangles
-    eulers_dynamo = table[['tdrot', 'tilt', 'narot']].to_numpy()
-    eulers_warp = convert_eulers(eulers_dynamo,
-                                 source_meta='dynamo',
-                                 target_meta='warp')
-    data['rlnAngleRot'] = eulers_warp[:, 0]
-    data['rlnAngleTilt'] = eulers_warp[:, 1]
-    data['rlnAnglePsi'] = eulers_warp[:, 2]
+	# extract and convert eulerangles
+	eulers_dynamo = table[['tdrot', 'tilt', 'narot']].to_numpy()
+	eulers_warp = convert_eulers(eulers_dynamo, source_meta='dynamo',target_meta='warp')
+	data['rlnAngleRot'] = eulers_warp[:, 0]
+	data['rlnAngleTilt'] = eulers_warp[:, 1]
+	data['rlnAnglePsi'] = eulers_warp[:, 2]
 
-    
-    # extract and sanitise micrograph names to ensure compatibility with M
-    data['rlnTomoName'] = table['tomo_file'].apply(sanitise_imod_tomo_name)
+	
+	# extract and sanitise micrograph names to ensure compatibility with M
+	data['rlnTomoName'] = table['tomo_file'].apply(sanitise_imod_tomo_name)
 
 	print(data)
-    # convert dict to dataframe
-    df = pd.DataFrame.from_dict(data)
+	# convert dict to dataframe
+	df = pd.DataFrame.from_dict(data)
 
-    # write out STAR file
-    starfile.write(df, output_star_file, overwrite=True)
+	# write out STAR file
+	starfile.write(df, output_star_file, overwrite=True)
 
-    # echo to console
-    print(f"Done! Converted '{input_table_file}' to RELION/Warp compatible STAR file '{output_star_file}'")
+	# echo to console
+	print(f"Done! Converted '{input_table_file}' to RELION/Warp compatible STAR file '{output_star_file}'")
 
-    return
-    
+	return
+	
 def sanitise_imod_tomo_name(micrograph_name: str) -> str:
-    """
-    Replaces tomogram name from IMOD reconstructions with corresponding name file if appropriate
-    Ensures compatibility with M for subsequent STAR files
-    :param micrograph_name:
-    :return:
-    """
-    micro = re.sub(r"_rec.mrc", "", micrograph_name)
-    return re.sub(r"^.*\/", "", micro)
-    
-    
+	"""
+	Replaces tomogram name from IMOD reconstructions with corresponding name file if appropriate
+	Ensures compatibility with M for subsequent STAR files
+	:param micrograph_name:
+	:return:
+	"""
+	micro = re.sub(r"_rec.mrc", "", micrograph_name)
+	return re.sub(r"^.*\/", "", micro)
+	
+	
 
 
 
