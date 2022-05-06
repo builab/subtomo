@@ -46,12 +46,9 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 	# extract and sanitise micrograph names to ensure compatibility with M
 	data['rlnTomoName'] = table['tomo_file'].apply(sanitise_imod_tomo_name)
 
-	#print(data)
 	# convert dict to dataframe
 	df = pd.DataFrame.from_dict(data)
 	
-	print(df)
-
 	# write out STAR file
 	starfile.write(df, output_star_file, overwrite=True)
 
@@ -70,9 +67,6 @@ def sanitise_imod_tomo_name(micrograph_name: str) -> str:
 	micro = re.sub(r"_rec.mrc", "", micrograph_name)
 	return re.sub(r"^.*\/", "", micro)
 	
-	
-
-
 
 if __name__=='__main__':
    	# get name of input starfile, output starfile, output stack file
@@ -118,6 +112,6 @@ if __name__=='__main__':
 		
 	#print("Writing tomogram description tomograms_descr.star\n")
 	#write_star_4(df_descr, "", 'tomograms_descr.star')
-	starfile.write(df_descr, args.ostar.replace(".star", "_tomo_descr.star"))
+	starfile.write(df_descr, args.ostar.replace(".star", "_tomo_descr.star"), overwrite=True)
 	print("Done! Write " + args.ostar.replace(".star", "_tomo_descr.star"))
 	
