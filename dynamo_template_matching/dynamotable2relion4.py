@@ -119,4 +119,4 @@ if __name__=='__main__':
 	print("Writing tomogram description tomograms_descr.star\n")
 	#write_star_4(df_descr, "", 'tomograms_descr.star')
 	starfile.write(df_descr, args.ostar.replace(".star", "_tomo_descr.star"))
-    print(f"Done! Write '{args.ostar.replace(".star", "_tomo_descr.star")'}")
+    print(f"Done! Write '{args.ostar.replace(".star", "_tomo_descr.star")}'")
