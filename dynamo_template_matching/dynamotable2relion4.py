@@ -44,11 +44,13 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 
 	
 	# extract and sanitise micrograph names to ensure compatibility with M
-	data['rlnTomoName'] = table['tomo_file'].apply(sanitise_imod_tomo_name)
+	#data['rlnTomoName'] = table['tomo_file'].apply(sanitise_imod_tomo_name)
 
-	#print(data)
+	print(data)
 	# convert dict to dataframe
 	df = pd.DataFrame.from_dict(data)
+	
+	print(df)
 
 	# write out STAR file
 	starfile.write(df, output_star_file, overwrite=True)
