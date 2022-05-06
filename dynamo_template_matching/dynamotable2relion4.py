@@ -32,7 +32,7 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 		shift_axis = f'd{axis}'
 		data[heading] = (table[axis] + table[shift_axis])*binFactor
 
-	data['TomoParticleId'] = np.arange(len(data), dtype=np.int16) + 1
+	#data['TomoParticleId'] = np.arange(len(data), dtype=np.int16) + 1
 
 	# extract and convert eulerangles
 	eulers_dynamo = table[['tdrot', 'tilt', 'narot']].to_numpy()
