@@ -9,15 +9,13 @@
 # Output also the tomograms_descr.star
 # Huy Bui, McGill 2021
 
-import numpy as np
+#import numpy as np
 import pandas as pd
 import argparse, os
 import starfile
 import dynamotable
+import re
 
-from eulerangles import euler2matrix
-from eulerangles import matrix2euler
-from eulerangles import euler2euler
 from eulerangles import convert_eulers
 
 def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFactor):
@@ -116,7 +114,7 @@ if __name__=='__main__':
 		df_length = len(df_descr)
 		df_descr.loc[df_length] = row
 		
-	print("Writing tomogram description tomograms_descr.star\n")
+	#print("Writing tomogram description tomograms_descr.star\n")
 	#write_star_4(df_descr, "", 'tomograms_descr.star')
 	starfile.write(df_descr, args.ostar.replace(".star", "_tomo_descr.star"))
 	print("Done! Write " + args.ostar.replace(".star", "_tomo_descr.star"))
