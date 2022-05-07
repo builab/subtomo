@@ -92,7 +92,7 @@ if __name__=='__main__':
 	
 	# Making tomogram_desc.star	
 	# This can be improved similar to the code from Alister Burt before
-	descr_header = ["TomoName", "TomoTiltSeriesName", "TomoImportCtfFindFile", "TomoImportImodDir", "TomoImportFractionalDose", "TomoImportOrderList", "TomoImportCulledFile"]
+	descr_header = ["rlnTomoName", "rlnTomoTiltSeriesName", "rlnTomoImportCtfFindFile", "rlnTomoImportImodDir", "rlnTomoImportFractionalDose", "rlnTomoImportOrderList", "rlnTomoImportCulledFile"]
 	df_descr = pd.DataFrame(columns =descr_header)
 	for idx in range(len(df_tomolist)):	
 		tomoPath = df_tomolist.loc[idx, 'TomoPath'];
