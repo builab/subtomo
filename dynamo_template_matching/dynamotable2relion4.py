@@ -87,7 +87,7 @@ if __name__=='__main__':
 
 	args = parser.parse_args()
 	pixelSize = float(args.angpix)
-	helicalCol = float(args.helicalCol)
+	helicalCol = int(args.helicalCol)
 
 	# Convert Coordinate
 	dynamo2relion4(args.tbl, args.tomodoc, args.ostar, float(args.bin), helicalCol)
