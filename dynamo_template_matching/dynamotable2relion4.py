@@ -16,10 +16,12 @@ import re
 
 from eulerangles import convert_eulers
 
-def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFactor):
+def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFactor, helicalCol):
  	# Modify now with angpix to make sure it is specified correctly
 	# Read table file into dataframe
 	table = dynamotable.read(input_table_file, table_map_file)
+	
+	tableLookup = ["tag", "aligned", "averaged", "dx", "dy", "dz", "tdrot", "tilt", "narot", "cc", "cc2", "cpu", "ftype", "ymintilt", "ymaxtilt", "xmintilt", "xmaxtilt", "fs1", "fs2", "tomo", "reg", "class", "annotation", "x", "y", "z", "dshift", "daxis", "dnarot", "dcc", "otag", "npar", "ref", "sref", "apix", "def", "eig1", "eig2"]
 
 	# Prep data for star file in dict
 	data = {}
@@ -38,6 +40,10 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 	data['rlnAngleRot'] = eulers_warp[:, 0]
 	data['rlnAngleTilt'] = eulers_warp[:, 1]
 	data['rlnAnglePsi'] = eulers_warp[:, 2]
+	
+	if helicalCol > 0:
+		data['rlnHelicalTubeID'] = table[tableLookup[helicalCol - 1]]
+	end
 
 	
 	# extract and sanitise micrograph names to ensure compatibility with Relion 4.0
@@ -75,14 +81,16 @@ if __name__=='__main__':
 	parser.add_argument('--ostar', help='Output star file',required=True)
 	parser.add_argument('--angpix', help='Original pixel size',required=True)
 	parser.add_argument('--bin', help='Bin of current tomo',required=True)
+	parser.add_argument('--helicalCol', help='Column from table to used as helicalID',required=False,default=0)
 	parser.add_argument('--frac_dose', help='Tomo fractional dose',required=True, default=2)
 
 
 	args = parser.parse_args()
 	pixelSize = float(args.angpix)
+	helicalCol = float(args.helicalCol)
 
 	# Convert Coordinate
-	dynamo2relion4(args.tbl, args.tomodoc, args.ostar, float(args.bin))
+	dynamo2relion4(args.tbl, args.tomodoc, args.ostar, float(args.bin), helicalCol)
 	
 	# Convert tomo description file
 	tomodoc_header=["TomoNo", "TomoPath"]
