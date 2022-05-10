@@ -43,7 +43,6 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 	
 	if helicalCol > 0:
 		data['rlnHelicalTubeID'] = table[tableLookup[helicalCol - 1]]
-	end
 
 	
 	# extract and sanitise micrograph names to ensure compatibility with Relion 4.0
@@ -87,10 +86,10 @@ if __name__=='__main__':
 
 	args = parser.parse_args()
 	pixelSize = float(args.angpix)
-	helicalCol = int(args.helicalCol)
+	
 
 	# Convert Coordinate
-	dynamo2relion4(args.tbl, args.tomodoc, args.ostar, float(args.bin), helicalCol)
+	dynamo2relion4(args.tbl, args.tomodoc, args.ostar, float(args.bin), int(args.helicalCol))
 	
 	# Convert tomo description file
 	tomodoc_header=["TomoNo", "TomoPath"]
