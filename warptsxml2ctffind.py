@@ -16,7 +16,7 @@ if __name__=='__main__':
 
 	for xmlfile in xmlfiles:
 		ts = ET.parse(xmlfile)
-		outfile = xmlfile.replace('mrc.xml', '_output.txt')
+		outfile = xmlfile.replace('.mrc.xml', '_output.txt')
 		root = ts.getroot()
 		
 		z = []
