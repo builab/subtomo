@@ -12,15 +12,50 @@ E.g. python create_warp_imod_input.py "FAP256*"
 
 
 import glob, sys
-import os
+import os, shutil
 
 if __name__=='__main__':
 
 	pattern = sys.argv[1]
 	
+	warpDir = 'warp_imod'
+	
 	mdocfiles = glob.glob(pattern + '/*.mrc.mdoc')
+	
+	if len(mdocfiles) < 1:
+		print('No folder is found with pattern: ' + pattern)
+	
+	try:
+		os.mkdir(warpdir)
+	except OSError as exc:
+		if exc.errno != errno.EEXIST:
+			raise
+		pass
 
 	for mdoc in mdocfiles:
-		print(mdoc)
+		tsName = os.path.basename(mdoc).replace('.mrc.mdoc', '')
+		tsPath = os.path.dirname(mdoc)
+		print('Processing tilt series ' + tsName)
+		
+		# Mkdir folder name
+		destDir = warpDir + '/' + tsName + '.mrc'
+		try:
+			os.mkdir(destDir)
+		except OSError as exc:
+			if exc.errno != errno.EEXIST:
+				raise
+			pass
+		
+		# Copy taSolution
+		try:
+    		shutil.copy(tsPath + '/taSolution.log', destDir)
+    		print("\ttaSolution.log copied successfully.")
+    		shutil.copy(tsPath + '/' + tsName + '.xf', destDir + '/' + tsName '.mrc.xf')
+    		print('\t' + tsName + '.xf copied successfully!')		
+    	except PermissionError:
+			print("Permission denied.")
+		# For other errors
+		except:
+			print("Error occurred while copying file.")
+    		
 
-	
