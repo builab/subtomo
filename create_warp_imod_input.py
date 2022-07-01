@@ -52,7 +52,7 @@ if __name__=='__main__':
 			print("\ttaSolution.log copied successfully.")
 			shutil.copy(tsPath + '/' + tsName + '.xf', destDir + '/' + tsName + '.mrc.xf')
 			print('\t' + tsName + '.xf copied successfully!')		
-    	except PermissionError:
+		except PermissionError:
 			print("Permission denied.")
 		# For other errors
 		except:
