@@ -26,7 +26,7 @@ if __name__=='__main__':
 		print('No folder is found with pattern: ' + pattern)
 	
 	try:
-		os.mkdir(warpdir)
+		os.mkdir(warpDir)
 	except OSError as exc:
 		if exc.errno != errno.EEXIST:
 			raise
