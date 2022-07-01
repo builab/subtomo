@@ -48,14 +48,13 @@ if __name__=='__main__':
 		
 		# Copy taSolution
 		try:
-    		shutil.copy(tsPath + '/taSolution.log', destDir)
-    		print("\ttaSolution.log copied successfully.")
-    		shutil.copy(tsPath + '/' + tsName + '.xf', destDir + '/' + tsName '.mrc.xf')
-    		print('\t' + tsName + '.xf copied successfully!')		
+			shutil.copy(tsPath + '/taSolution.log', destDir)
+			print("\ttaSolution.log copied successfully.")
+			shutil.copy(tsPath + '/' + tsName + '.xf', destDir + '/' + tsName '.mrc.xf')
+			print('\t' + tsName + '.xf copied successfully!')		
     	except PermissionError:
 			print("Permission denied.")
 		# For other errors
 		except:
 			print("Error occurred while copying file.")
-    		
-
+			
