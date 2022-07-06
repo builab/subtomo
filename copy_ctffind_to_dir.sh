@@ -4,8 +4,8 @@
 
 for i in *_output.txt;
 do
-	# Removing the ending .mrc from i
-	tsdir=${i/_output.txt}
-    echo "cp ${i} ../${base_name}";
-    cp ${i} ../${base_name}
+    # Removing the ending .mrc from i
+    tsdir=${i/_output.txt}
+    echo "cp ${i} ../${tsdir}";
+    cp ${i} ../${tsdir}
 done
