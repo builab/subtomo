@@ -1,6 +1,7 @@
 #!/bin/bash
 # Script used for copying the ctffind to each tilt series folder
 # The assumption that the warp_ctf folder is the same level as each tilt series
+# HB 2022/07
 
 for i in *_output.txt;
 do
