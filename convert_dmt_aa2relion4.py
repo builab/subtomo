@@ -1,8 +1,9 @@
 #/usr/bin/python3
 # Convert the entire cilia from AA to relion4
-# HB 11/2021
-# Still not yet convert the shift
-# Also, no helical
+# Must run adjustOrigin from AA before
+# Add HelicalTubeID now
+# HB 08/2022
+
 
 import numpy as np
 import pandas as pd
@@ -142,8 +143,8 @@ if __name__=='__main__':
 			
 		print('   -->' + str(doubletId))
 		# This part need to be fixed
-		starFile = 'star/' + record[1]  + '.star'
-		docFile = 'doc/doc_total_' + record[0] + '.spi'
+		starFile = 'star_corr/' + record[1]  + '.star'
+		docFile = 'doc_corr/doc_total_' + record[0] + '.spi'
 		# Remove the comment in spider file
 		preprocess_bstar(starFile)
 		preprocess_spider_doc(docFile)
@@ -159,6 +160,6 @@ if __name__=='__main__':
 	df_all['TomoParticleId'] = np.arange(len(df_all), dtype=np.int16) + 1
 	print("Writing " + args.ostar)
 	write_star_4(df_all, args.ostar, 'particles') 
-	print("Writing tomograms_descr.star")
-	write_star_4(df_tomo, 'tomograms_descr.star', '')
+	print("Writing tomograms_" + args.ostar)
+	write_star_4(df_tomo, 'tomograms_' + args.ostar, '')
 
