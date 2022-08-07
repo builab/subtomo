@@ -54,10 +54,10 @@ def aa_to_relion(starFile, docFile, tomoName, tomoNo, binFactor, pixelSize, doub
 	nrows, ncols = origin.shape
 
 	# Hard Code Here
-	header_list = ["TomoName", "TomoParticleId", "TomoManifoldIndex", "CoordinateX", "CoordinateY", "CoordinateZ", "OriginXAngst", "OriginYAngst", "OriginZAngst", "AngleRot", "AngleTilt", "AnglePsi", "ClassNumber", "RandomSubset"]
+	header_list = ["TomoName", "TomoParticleId", "HelicalTubeID", "CoordinateX", "CoordinateY", "CoordinateZ", "OriginXAngst", "OriginYAngst", "OriginZAngst", "AngleRot", "AngleTilt", "AnglePsi", "ClassNumber", "RandomSubset"]
 	df_relion = pd.DataFrame(columns = header_list)
 	df_relion['TomoParticleId'] = np.arange(len(df2), dtype=np.int16) + 1
-	df_relion['TomoManifoldIndex'] = np.ones(len(df2['CoordinateX']), dtype=np.int16)*doubletId	
+	df_relion['HelicalTubeID'] = np.ones(len(df2['CoordinateX']), dtype=np.int16)*doubletId	
 	df_relion['CoordinateX'] = df2['CoordinateX']*binFactor;
 	df_relion['CoordinateY'] = df2['CoordinateY']*binFactor;
 	df_relion['CoordinateZ'] = df2['CoordinateZ']*binFactor;
