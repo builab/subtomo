@@ -2,6 +2,7 @@
 # Convert the entire cilia from AA to relion4
 # HB 11/2021
 # Still not yet convert the shift
+# Also, no helical
 
 import numpy as np
 import pandas as pd
