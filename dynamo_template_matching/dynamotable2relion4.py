@@ -46,7 +46,7 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 		# Temporary Fix random subset base on tomogram instead of letting Relion do it later
 		if int(args.randomSubset) > 0:
 			assignedSet = 1
-			randomSubset = table['tomo']
+			randomSubset = table['tomo'].copy()
 			for tomoId in randomSubset.unique():
 				randomSubset[randomSubset == tomoId] = assignedSet;
 				if assignedSet == 1:
