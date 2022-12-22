@@ -16,7 +16,7 @@ import re
 
 from eulerangles import convert_eulers
 
-def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFactor, helicalCol):
+def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFactor, helicalCol, randomSubset):
  	# Modify now with angpix to make sure it is specified correctly
 	# Read table file into dataframe
 	table = dynamotable.read(input_table_file, table_map_file)
