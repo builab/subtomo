@@ -50,7 +50,7 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 			randomSubset[randomSubset == tomoId] = assignedSet;
 			if assignedSet == 1:
 				assignedSet = 2
-			else
+			else:
 				assignedSet = 1
 				
 		print(randomSubset)
