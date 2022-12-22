@@ -43,6 +43,19 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 	
 	if helicalCol > 0:
 		data['rlnHelicalTubeID'] = table[tableLookup[helicalCol - 1]]
+		# Temporary Fix random subset base on tomogram instead of letting Relion do it later
+		assignedSet = 1
+		randomSubset = table['tomo']
+		for tomoId in randomSubset.unique():
+			randomSubset[randomSubset == tomoId] = assignedSet;
+			if assignedSet == 1:
+				assignedSet = 2
+			else
+				assignedSet = 1
+				
+		print(randomSubset)
+		data['rlnRandomSubset'] = randomSubset
+			
 
 	
 	# extract and sanitise micrograph names to ensure compatibility with Relion 4.0
@@ -80,8 +93,9 @@ if __name__=='__main__':
 	parser.add_argument('--ostar', help='Output star file',required=True)
 	parser.add_argument('--angpix', help='Original pixel size',required=True)
 	parser.add_argument('--bin', help='Bin of current tomo',required=True)
-	parser.add_argument('--helicalCol', help='Column from table to used as helicalID',required=False,default=0)
 	parser.add_argument('--frac_dose', help='Tomo fractional dose',required=True, default=2)
+	parser.add_argument('--helicalCol', help='Column from table to used as helicalID',required=False,default=0)
+	parser.add_argument('--randomSubset', help='Divide random subset for helical (1 = yes)',required=False,default=0)
 
 
 	args = parser.parse_args()
@@ -89,7 +103,7 @@ if __name__=='__main__':
 	
 
 	# Convert Coordinate
-	dynamo2relion4(args.tbl, args.tomodoc, args.ostar, float(args.bin), int(args.helicalCol))
+	dynamo2relion4(args.tbl, args.tomodoc, args.ostar, float(args.bin), int(args.helicalCol), int(args.randomSubset))
 	
 	# Convert tomo description file
 	tomodoc_header=["TomoNo", "TomoPath"]
