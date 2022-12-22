@@ -54,7 +54,7 @@ def dynamo2relion4 (input_table_file, table_map_file, output_star_file, binFacto
 				else:
 					assignedSet = 1
 				
-			print(randomSubset)
+			#print(randomSubset)
 			data['rlnRandomSubset'] = randomSubset
 			
 
