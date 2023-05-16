@@ -3,7 +3,6 @@
 """
 v0.1
 Created on Sat Dec  4 22:56:14 2021
-
 Script to downgrade Relion 4.0 star file to Relion 3.0 for Warp subtomo boxing
 For now, only deal with original file for import
 Usage: relion4_to_warp.py --i run_data.star --o run_data_rln3.0.star --angpix 2.12 --rescale_angpix 8.48
@@ -41,7 +40,7 @@ if __name__=='__main__':
 	
 	# Initialize dict       
 	data = {}
-	data['rlnMicrographName'] = df['rlnTomoName'].astype(str) + ".mrc_{0:.2f}Apx".format(rescale_angpix)
+	data['rlnMicrographName'] = df['rlnTomoName'].astype(str) + ".mrc_{0:.2f}Apx.mrc".format(rescale_angpix)
 	data['rlnCoordinateX']=df['rlnCoordinateX'].to_numpy()*angpix/rescale_angpix
 	data['rlnCoordinateY']=df['rlnCoordinateY'].to_numpy()*angpix/rescale_angpix
 	data['rlnCoordinateZ']=df['rlnCoordinateZ'].to_numpy()*angpix/rescale_angpix
@@ -53,6 +52,6 @@ if __name__=='__main__':
 	dfout = pd.DataFrame.from_dict(data)
 	
 	starfile.write(dfout, args.o, overwrite=True)
-	print(f"Done! Write '{args.i}' to RELION/Warp compatible STAR file '{args.i}'")
+	print(f"Done! Write '{args.i}' to RELION/Warp compatible STAR file '{args.o}'")
 
 	
