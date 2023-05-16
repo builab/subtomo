@@ -41,7 +41,7 @@ if __name__=='__main__':
 	
 	# Initialize dict       
 	data = {}
-	data['rlnMicrographName'] = df['rlnTomoName'].add_suffix(".mrc_{0:.2f}Apx".format(rescale_angpix))
+	data['rlnMicrographName'] = df['rlnTomoName'].astype(str) + ".mrc_{0:.2f}Apx".format(rescale_angpix)
 	data['rlnCoordinateX']=df['rlnCoordinateX'].to_numpy()*angpix/rescale_angpix
 	data['rlnCoordinateY']=df['rlnCoordinateY'].to_numpy()*angpix/rescale_angpix
 	data['rlnCoordinateZ']=df['rlnCoordinateZ'].to_numpy()*angpix/rescale_angpix
