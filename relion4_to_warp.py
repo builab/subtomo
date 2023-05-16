@@ -19,6 +19,7 @@ import argparse
 from eulerangles import euler2matrix
 
 if __name__=='__main__':
+	print('Warning!! Only work with simple relion 4.0 particle file')
 	parser = argparse.ArgumentParser(description='Convert Relion 4.0 subtomo star to ChimeraX session')
 	parser.add_argument('--i', help='Input star file',required=True)
 	parser.add_argument('--o', help='Output ChimeraX Script',required=True)
@@ -34,9 +35,8 @@ if __name__=='__main__':
 	
 
 	# Loading Relion 4.0 original star file
-	stardict = starfile.read(args.i)
-	print(stardict)	
-	df = stardict['particles']
+	df = starfile.read(args.i)
+	print(df)	
 	# Relion 4.0 or 3.1
 	
 	# Initialize dict       
