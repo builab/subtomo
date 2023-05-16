@@ -35,9 +35,7 @@ if __name__=='__main__':
 
 	# Loading Relion 4.0 original star file
 	stardict = starfile.read(args.i)
-	
-	#df_optics = stardict['optics']	
-	
+	print(stardict)	
 	df = stardict['particles']
 	# Relion 4.0 or 3.1
 	
