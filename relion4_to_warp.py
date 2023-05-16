@@ -36,12 +36,12 @@ if __name__=='__main__':
 
 	# Loading Relion 4.0 original star file
 	df = starfile.read(args.i)
-	print(df)	
+	#print(df)	
 	# Relion 4.0 or 3.1
 	
 	# Initialize dict       
 	data = {}
-	data['rlnMicrographName'] = df['rlnTomoName'].add_suffix(".mrc_{0.2:f}Apx".format(rescale_angpix))
+	data['rlnMicrographName'] = df['rlnTomoName'].add_suffix(".mrc_{0:.2f}Apx".format(rescale_angpix))
 	data['rlnCoordinateX']=df['rlnCoordinateX'].to_numpy()*angpix/rescale_angpix
 	data['rlnCoordinateY']=df['rlnCoordinateY'].to_numpy()*angpix/rescale_angpix
 	data['rlnCoordinateZ']=df['rlnCoordinateZ'].to_numpy()*angpix/rescale_angpix
