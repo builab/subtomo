@@ -1,5 +1,21 @@
 # Scripts used for subtomogram averaging
 
+
+## Installation
+
+conda create -n subtomo python=3.8
+
+conda activate subtomo
+
+pip install eulerangles
+
+pip install numpy
+
+pip install pandas
+
+pip install dynamotable
+
+
 ## Convert Axoneme Align Project To Input Relion 4 Star File
 
 ***python convert_dmt_aa2relion4.py --i list_doublet_ida_v1.txt --ostar input.star --angpix pixelSize --bin binFactor --frac_dose fractionDose***
