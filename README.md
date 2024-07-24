@@ -11,7 +11,9 @@ pip install eulerangles
 
 pip install numpy
 
-pip install pandas
+# Panda 2.0 doesn't work because of append function
+
+pip install pandas==1.2
 
 pip install dynamotable
 
